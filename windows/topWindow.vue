@@ -35,7 +35,7 @@
 					<!-- #endif -->
 					<!-- 公共设置 -->
 
-					<view class="menu-item uni-icons-search"><span>搜索</span></view>
+					<view class="menu-item uni-icons-search" @click="toSearch"><span>搜索</span></view>
 					<view class="menu-item uni-icons-email-filled" style="position: relative;">
 						<uni-badge size="small" class="badge" text="1" type="error"></uni-badge>
 					</view>
@@ -95,7 +95,9 @@
 						<uni-td align="center">{{ item.id }}</uni-td>
 						<uni-td align="center">{{ item.name }}</uni-td>
 						<uni-td align="center">{{ item.description }}</uni-td>
-						<uni-td align="center" @click="item.action"><uni-link href="#" text="Go"></uni-link></uni-td>
+						<uni-td align="center" @click="item.action">
+							<uni-link href="#" text="Go"></uni-link>
+						</uni-td>
 					</uni-tr>
 				</uni-table>
 			</view>
@@ -216,6 +218,9 @@
 					this.ctrlDown = e.type === 'keydown'
 					this.$refs.quickTipsPopup[this.ctrlDown ? 'open' : 'close']()
 				}
+			},
+			toSearch() {
+				
 			}
 		}
 	}

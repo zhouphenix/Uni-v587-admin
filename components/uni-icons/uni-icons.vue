@@ -3,7 +3,7 @@
 </template>
 
 <script>
-	import icons from './icons.js';
+	import icons from './m-icons.js';
 	// #ifdef APP-NVUE
 	var domModule = weex.requireModule('dom');
 	domModule.addRule('fontFace', {
@@ -58,7 +58,7 @@
 	/* #ifndef APP-NVUE */
 	@font-face {
 		font-family: uniicons;
-		src: url('./uni.ttf') format('truetype');
+		src: url('./m-uni.ttf') format('truetype');
 	}
 
 	/* #endif */

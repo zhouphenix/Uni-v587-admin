@@ -8,12 +8,14 @@
 				<uni-easyinput v-model="formData.name" :clearable="false" placeholder="请输入菜单名称" />
 			</uni-forms-item>
 			<uni-forms-item name="icon" label="图标" style="margin-bottom: 40px;">
-				<uni-easyinput v-model="formData.icon" :clearable="false" placeholder="请输入菜单图标" />
-				<uni-link font-size="12" href="https://uniapp.dcloud.net.cn/uniCloud/admin?id=icon-%e5%9b%be%e6%a0%87" text="如何获取内置图标或使用自定义图标？"
+				<uni-easyinput v-model="formData.icon" :clearable="false" placeholder="请输入菜单图标css样式类名">
+					<span slot="right" style="color: #007aff; cursor: pointer;padding-right: 10px;" @click="showIconPopup">内置图标</span>
+				</uni-easyinput>
+				<uni-link font-size="12" href="https://uniapp.dcloud.net.cn/uniCloud/admin?id=icon-%e5%9b%be%e6%a0%87" text="如何使用自定义图标？"
 				 class="uni-form-item-tips"></uni-link>
 			</uni-forms-item>
 			<uni-forms-item name="url" label="URL">
-				<uni-easyinput v-model="formData.url" :clearable="false" placeholder="请输入菜单url" />
+				<uni-easyinput v-model="formData.url" :clearable="false" placeholder="请输入菜单相路径, 如: /pages/system/menu/add" />
 			</uni-forms-item>
 			<uni-forms-item name="sort" label="序号">
 				<uni-easyinput v-model="formData.sort" :clearable="false" placeholder="请输入菜单序号（越大越靠后）" />
@@ -35,12 +37,21 @@
 				<button style="width: 100px;" type="primary" class="uni-button" @click="submitForm">提交</button>
 				<navigator open-type="navigateBack" style="margin-left: 15px;"><button style="width: 100px;" class="uni-button">返回</button></navigator>
 			</view>
+			<uni-popup class="icon-modal-box" ref="iconPopup" type="center">
+				<view class="icon-modal icon-modal-pc">
+					<Icons :tag="false" :fix-window="false"/>
+				</view>
+			</uni-popup>
 		</uni-forms>
 	</view>
 </template>
 
 <script>
 	import validator from '@/js_sdk/validator/opendb-admin-menus.js';
+	import Icons from '@/pages/demo/icons/icons.vue'
+	import {
+		mapActions
+	} from 'vuex'
 
 	const db = uniCloud.database();
 	const dbCmd = db.command;
@@ -57,6 +68,9 @@
 	}
 
 	export default {
+		components: {
+			Icons
+		},
 		data() {
 			return {
 				formData: {
@@ -80,6 +94,9 @@
 			this.getDetail(id)
 		},
 		methods: {
+			...mapActions({
+				init: 'app/init'
+			}),
 			/**
 			 * 触发表单提交
 			 */
@@ -113,6 +130,7 @@
 					uni.showToast({
 						title: '修改成功'
 					})
+					this.init()
 					this.getOpenerEventChannel().emit('refreshData')
 					setTimeout(() => uni.navigateBack(), 500)
 				}).finally(() => {
@@ -143,7 +161,28 @@
 				}).finally(() => {
 					uni.hideLoading()
 				})
+			},
+			showIconPopup() {
+				this.$refs.iconPopup.open()
 			}
 		}
 	}
 </script>
+<style scoped>
+	.icon-modal-box {
+		padding-top: var(--top-window-height);
+	}
+
+	.icon-modal {
+		width: 350px;
+		background-color: #fff;
+		height: 500px;
+		overflow-y: scroll;
+	}
+
+	@media screen and (min-width: 768px) {
+		.icon-modal-pc {
+			width: 600px;
+		}
+	}
+</style>

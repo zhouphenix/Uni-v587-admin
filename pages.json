@@ -20,6 +20,23 @@
 				"navigationBarTitleText": "修改密码"
 			}
 
+		},
+		// uni-cloud-banner模块
+		{
+			"path": "uni_modules/uni-cloud-banner/pages/opendb-banner/add",
+			"style": {
+				"navigationBarTitleText": "新增"
+			}
+		}, {
+			"path": "uni_modules/uni-cloud-banner/pages/opendb-banner/edit",
+			"style": {
+				"navigationBarTitleText": "修改"
+			}
+		}, {
+			"path": "uni_modules/uni-cloud-banner/pages/opendb-banner/list",
+			"style": {
+				"navigationBarTitleText": "列表"
+			}
 		}
 	],
 	"subPackages": [{
