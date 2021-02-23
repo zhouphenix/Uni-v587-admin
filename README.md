@@ -5,3 +5,11 @@
 
 ## 一、[TODO 待处理事务插件](./uni_modules/v587-todo/readme.md)
 ## 二、[一键换肤 插件](./uni_modules/v587-theme/readme.md)
+
+## 关注订阅号
+
+关注订阅号，回复“v587体验账号” 获取体验账号
+
+![关注订阅号](https://vkceyugu.cdn.bspapp.com/VKCEYUGU-aeeaeb50-6081-4de4-b6ab-d4b54fca38bf/00aa4a73-04b4-4b1a-b6d1-161a2781ec88.jpg)
+
+
