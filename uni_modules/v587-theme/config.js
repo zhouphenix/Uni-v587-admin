@@ -1,0 +1,1 @@
+export const KEY_THEME = 'v587-theme'

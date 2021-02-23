@@ -1,15 +1,22 @@
 <template>
 	<scroll-view class="sidebar" scroll-y="true">
-<!-- 		<uni-data-menu v-model="current" collection="opendb-admin-menus" gettree field="url as value, name as text, menu_id, icon" orderby="sort asc" active-text-color="#409eff">
+		<!-- 		<uni-data-menu v-model="current" collection="opendb-admin-menus" gettree field="url as value, name as text, menu_id, icon" orderby="sort asc" active-text-color="#409eff">
 			<uni-menu-sidebar :data="staticMenu"></uni-menu-sidebar>
 		</uni-data-menu> -->
-		<uni-nav-menu :uniqueOpened="true" :active="active" activeKey="url" activeTextColor="#409eff" @select="select">
+		<uni-nav-menu :uniqueOpened="true" :active="active" activeKey="url" activeTextColor="#409eff" @select="select"
+		 backgroundColor="transparent">
 			<uni-menu-sidebar :data="navMenu"></uni-menu-sidebar>
 			<uni-menu-sidebar :data="staticMenu"></uni-menu-sidebar>
 		</uni-nav-menu>
 		<view class="left-settings">
 			<view class="uni-icons-gear-filled"><span>设置</span></view>
-			<view class="uni-icons-hand-thumbsup-filled"><span>换肤</span></view>
+			<view class="uni-icons-hand-thumbsup-filled theme-toggle">
+				<span>换肤</span>
+				<view class="theme-choice">
+					<span :class="{'theme-active': theme === 'light'}" @click="setTheme('light')">light</span>/<span :class="{'theme-active': theme === 'dark'}"
+					 @click="setTheme('dark')">dark</span>
+				</view>
+			</view>
 		</view>
 	</scroll-view>
 </template>
@@ -29,7 +36,8 @@
 			}
 		},
 		computed: {
-			...mapState('app', ['inited', 'navMenu', 'active'])
+			...mapState('app', ['inited', 'navMenu', 'active']),
+			...mapState('theme', ['theme']),
 		},
 		// #ifdef H5
 		watch: {
@@ -84,6 +92,10 @@
 					}
 				})
 			},
+
+			setTheme(theme) {
+				this.$store.commit('theme/SET_THEME', theme)
+			}
 		}
 	}
 </script>
@@ -96,8 +108,10 @@
 		height: calc(100vh - (var(--top-window-height)));
 		box-sizing: border-box;
 		border-right: 1px solid darken($left-window-bg-color, 8%);
-		background-color: $left-window-bg-color;
 		padding-bottom: 10px;
+		background: var(--sidebarBg) no-repeat 0 0;
+		background-position: center 0;
+		background-size: cover;
 	}
 
 	.title {
@@ -124,5 +138,33 @@
 				margin-left: 2px;
 			}
 		}
+	}
+
+	.theme-choice {
+		display: none;
+		position: absolute;
+		top: 0;
+		right: 0;
+		transform: translateY(-100%);
+		border: 1px solid #ccc;
+		padding: 6px 10px;
+		box-shadow: 4px 0 20px 4px #ccc inset;
+
+		span:hover {
+			text-decoration: underline;
+		}
+
+		.theme-active {
+			color: var(--primaryColor);
+			font-weight: 500;
+		}
+	}
+
+	.theme-toggle {
+		position: relative;
+	}
+
+	.theme-toggle:hover .theme-choice {
+		display: block;
 	}
 </style>

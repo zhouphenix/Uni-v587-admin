@@ -47,7 +47,7 @@ html {
 	box-sizing: border-box;
 	border-radius: 5px;
 	box-shadow: -1px -1px 5px 0 rgba(0, 0, 0, .1);
-	background-color: #fff;
+	background-color: var(--primaryColor);
 }
 
 .uni-app--showleftwindow .uni-container .uni-forms {

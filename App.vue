@@ -1,11 +1,16 @@
 <script>
 	import {
 		mapGetters,
-		mapActions
+		mapActions,
+		mapState
 	} from 'vuex'
 	import config from '@/admin.config.js'
-	import { version } from './package.json'
+	import {
+		version
+	} from './package.json'
+	import themeMixin from '@/uni_modules/v587-theme/mixins/index.js'
 	export default {
+		mixins:[themeMixin],
 		computed: {
 			...mapGetters({
 				isTokenValid: 'user/isTokenValid'
