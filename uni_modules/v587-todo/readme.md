@@ -7,6 +7,7 @@
 ## 使用
 按组件的方式使用（easycom、uni_modules）
 
-```
+```vue
 <v587-todo ></v587-todo>
 ```
+
