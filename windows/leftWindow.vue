@@ -13,8 +13,7 @@
 			<view class="uni-icons-hand-thumbsup-filled theme-toggle">
 				<span>换肤</span>
 				<view class="theme-choice">
-					<span :class="{'theme-active': theme === 'light'}" @click="setTheme('light')">light</span>/<span :class="{'theme-active': theme === 'dark'}"
-					 @click="setTheme('dark')">dark</span>
+					<span v-for="item in themeList" :class="{'theme-active': theme === item}" @click="setTheme(item)">{{item}}</span>
 				</view>
 			</view>
 		</view>
@@ -37,7 +36,7 @@
 		},
 		computed: {
 			...mapState('app', ['inited', 'navMenu', 'active']),
-			...mapState('theme', ['theme']),
+			...mapState('theme', ['theme', 'themeList']),
 		},
 		// #ifdef H5
 		watch: {
@@ -149,6 +148,12 @@
 		border: 1px solid #ccc;
 		padding: 6px 10px;
 		box-shadow: 4px 0 20px 4px #ccc inset;
+
+		span:not(:last-child){
+			border-right: 1px solid red;
+			padding-right: 4px;
+			margin-right: 4px;
+		}
 
 		span:hover {
 			text-decoration: underline;
