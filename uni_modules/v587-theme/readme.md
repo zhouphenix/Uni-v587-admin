@@ -73,12 +73,21 @@ onThemeChange(newVal, oldVal) {
 
 ### 4.使用
 
-main.js 文件中引入
++ 步骤一、main.js 文件中引入
 
 ```
 import V587Theme from '@/uni_modules/v587-theme/plugin.js'
 // 传入store 实例， 指定默认主题：theme: 'light'
 Vue.use(V587Theme, {store, theme: 'light'})
+```
+
++ 步骤二、App.vue 或任意使用的地方引入
+
+```
+import themeMixin from '@/uni_modules/v587-theme/mixins/index.js'
+export default {
+	mixins:[themeMixin]
+}
 ```
 
 ## 作品效果
