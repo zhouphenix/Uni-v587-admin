@@ -90,7 +90,7 @@ export default {
 }
 ```
 
-## 作品效果
+## 作品展示
 ![一键换肤效果图](https://vkceyugu.cdn.bspapp.com/VKCEYUGU-78a67da8-ae76-4f35-8fee-dac7cb24bcd4/69719962-dac3-4b1b-8dac-89163421fc17.gif)
 
 ## 关注订阅号
