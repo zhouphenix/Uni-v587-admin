@@ -35,12 +35,12 @@
 					<!-- #endif -->
 					<!-- 公共设置 -->
 
-					<view class="menu-item uni-icons-search" @click="toSearch"><span>搜索</span></view>
+					<view class="menu-item uni-icons-search" @click="toSearch"><span>{{$t('search')}}</span></view>
 					<view class="menu-item uni-icons-email-filled" style="position: relative;">
 						<uni-badge size="small" class="badge" text="1" type="error"></uni-badge>
 					</view>
 					<!-- #ifdef H5 -->
-					<view class="menu-item" :class="[fullscreen ? 'uni-icons-circle-filled': 'uni-icons-circle']" @click="toggleFullscreen"><span>全屏</span></view>
+					<view class="menu-item" :class="[fullscreen ? 'uni-icons-circle-filled': 'uni-icons-circle']" @click="toggleFullscreen"><span>{{$t('fullscreen')}}</span></view>
 					<!-- #endif -->
 					<view v-for="link in links" :key="link.url" class="menu-item">
 						<uni-link :href="link.url" :text="link.text" />
@@ -54,10 +54,10 @@
 							<text>{{userInfo.username}}</text>
 						</view>
 						<view class="menu-item" @click="chagePassword">
-							<text>修改密码</text>
+							<text>{{$t('change_password')}}</text>
 						</view>
 						<view class="menu-item ">
-							<text class="logout pointer" @click="logout">退出</text>
+							<text class="logout pointer" @click="logout">{{$t('logout')}}</text>
 						</view>
 					</template>
 					<view class="popup-menu__arrow"></view>

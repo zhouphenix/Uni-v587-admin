@@ -9,11 +9,17 @@
 			<uni-menu-sidebar :data="staticMenu"></uni-menu-sidebar>
 		</uni-nav-menu>
 		<view class="left-settings">
-			<view class="uni-icons-gear-filled"><span>设置</span></view>
+			<view class="uni-icons-gear-filled"><span>{{$t('settings')}}</span></view>
 			<view class="uni-icons-hand-thumbsup-filled theme-toggle">
-				<span>换肤</span>
+				<span>{{$t('theme')}}</span>
 				<view class="theme-choice">
 					<span v-for="item in themeList" :class="{'theme-active': theme === item}" @click="setTheme(item)">{{item}}</span>
+				</view>
+			</view>
+			<view class="uni-icons-star-filled theme-toggle">
+				<span>{{$t('language')}}</span>
+				<view class="theme-choice">
+					<span v-for="item in localeList" :class="{'theme-active': locale === item}"  @click="setLocale(item)">{{item}}</span>
 				</view>
 			</view>
 		</view>
@@ -36,7 +42,7 @@
 		},
 		computed: {
 			...mapState('app', ['inited', 'navMenu', 'active']),
-			...mapState('theme', ['theme', 'themeList']),
+			...mapState('theme', ['theme', 'themeList', 'locale', 'localeList']),
 		},
 		// #ifdef H5
 		watch: {
@@ -94,6 +100,10 @@
 
 			setTheme(theme) {
 				this.$store.commit('theme/SET_THEME', theme)
+			},
+
+			setLocale(locale) {
+				this.$store.commit('theme/SET_LOCALE', locale)
 			}
 		}
 	}
@@ -121,6 +131,7 @@
 		position: absolute;
 		bottom: 10px;
 		right: 10px;
+		text-align: center;
 
 		[class^=uni-icons-] {
 			margin-left: 10px;
@@ -170,6 +181,7 @@
 	}
 
 	.theme-toggle:hover .theme-choice {
-		display: block;
+		display: flex;
+		width: max-content;
 	}
 </style>

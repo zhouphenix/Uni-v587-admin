@@ -20,117 +20,186 @@
 				"navigationBarTitleText": "修改密码"
 			}
 
-		},
-		// uni-cloud-banner模块
-		{
-			"path": "uni_modules/uni-cloud-banner/pages/opendb-banner/add",
-			"style": {
-				"navigationBarTitleText": "新增"
-			}
-		}, {
-			"path": "uni_modules/uni-cloud-banner/pages/opendb-banner/edit",
-			"style": {
-				"navigationBarTitleText": "修改"
-			}
-		}, {
-			"path": "uni_modules/uni-cloud-banner/pages/opendb-banner/list",
-			"style": {
-				"navigationBarTitleText": "列表"
-			}
 		}
 	],
 	"subPackages": [{
-		"root": "pages/system",
-		"pages": [{
-			"path": "menu/list",
-			"style": {
-				"navigationBarTitleText": "菜单管理"
-			}
+			"root": "pages/system",
+			"pages": [{
+				"path": "menu/list",
+				"style": {
+					"navigationBarTitleText": "菜单管理"
+				}
+			}, {
+				"path": "menu/add",
+				"style": {
+					"navigationBarTitleText": "新增菜单",
+					"navigationStyle": "default"
+				}
+			}, {
+				"path": "menu/edit",
+				"style": {
+					"navigationBarTitleText": "修改菜单",
+					"navigationStyle": "default"
+				}
+			}, {
+				"path": "permission/list",
+				"style": {
+					"navigationBarTitleText": "权限管理"
+				}
+			}, {
+				"path": "permission/add",
+				"style": {
+					"navigationBarTitleText": "新增权限",
+					"navigationStyle": "default"
+				}
+			}, {
+				"path": "permission/edit",
+				"style": {
+					"navigationBarTitleText": "修改权限",
+					"navigationStyle": "default"
+				}
+			}, {
+				"path": "role/add",
+				"style": {
+					"navigationBarTitleText": "新增角色",
+					"navigationStyle": "default"
+				}
+			}, {
+				"path": "role/edit",
+				"style": {
+					"navigationBarTitleText": "修改角色",
+					"navigationStyle": "default"
+				}
+			}, {
+				"path": "role/list",
+				"style": {
+					"navigationBarTitleText": "角色管理"
+				}
+			}, {
+				"path": "user/add",
+				"style": {
+					"navigationBarTitleText": "新增用户",
+					"navigationStyle": "default"
+				}
+			}, {
+				"path": "user/edit",
+				"style": {
+					"navigationBarTitleText": "修改用户",
+					"navigationStyle": "default"
+				}
+			}, {
+				"path": "user/list",
+				"style": {
+					"navigationBarTitleText": "用户管理"
+				}
+			}]
 		}, {
-			"path": "menu/add",
-			"style": {
-				"navigationBarTitleText": "新增菜单",
-				"navigationStyle": "default"
-			}
-		}, {
-			"path": "menu/edit",
-			"style": {
-				"navigationBarTitleText": "修改菜单",
-				"navigationStyle": "default"
-			}
-		}, {
-			"path": "permission/list",
-			"style": {
-				"navigationBarTitleText": "权限管理"
-			}
-		}, {
-			"path": "permission/add",
-			"style": {
-				"navigationBarTitleText": "新增权限",
-				"navigationStyle": "default"
-			}
-		}, {
-			"path": "permission/edit",
-			"style": {
-				"navigationBarTitleText": "修改权限",
-				"navigationStyle": "default"
-			}
-		}, {
-			"path": "role/add",
-			"style": {
-				"navigationBarTitleText": "新增角色",
-				"navigationStyle": "default"
-			}
-		}, {
-			"path": "role/edit",
-			"style": {
-				"navigationBarTitleText": "修改角色",
-				"navigationStyle": "default"
-			}
-		}, {
-			"path": "role/list",
-			"style": {
-				"navigationBarTitleText": "角色管理"
-			}
-		}, {
-			"path": "user/add",
-			"style": {
-				"navigationBarTitleText": "新增用户",
-				"navigationStyle": "default"
-			}
-		}, {
-			"path": "user/edit",
-			"style": {
-				"navigationBarTitleText": "修改用户",
-				"navigationStyle": "default"
-			}
-		}, {
-			"path": "user/list",
-			"style": {
-				"navigationBarTitleText": "用户管理"
-			}
-		}]
-	}, {
-		"root": "pages/demo",
-		"pages": [{
-			"path": "init/init",
-			"style": {
-				"topWindow": false,
-				"leftWindow": false,
-				"navigationBarTitleText": "创建超级管理员"
-			}
-		}, {
-			"path": "icons/icons",
-			"style": {
-				"navigationBarTitleText": "图标"
-			}
-		}, {
-			"path": "table/table",
-			"style": {
-				"navigationBarTitleText": "表格"
-			}
-		}]
-	}],
+			"root": "pages/demo",
+			"pages": [{
+				"path": "init/init",
+				"style": {
+					"topWindow": false,
+					"leftWindow": false,
+					"navigationBarTitleText": "创建超级管理员"
+				}
+			}, {
+				"path": "icons/icons",
+				"style": {
+					"navigationBarTitleText": "图标"
+				}
+			}, {
+				"path": "table/table",
+				"style": {
+					"navigationBarTitleText": "表格"
+				}
+			}]
+		},
+		// uni-cloud-banner模块
+		{
+			"root": "uni_modules/uni-cloud-banner/pages/opendb-banner",
+			"pages": [{
+				"path": "/add",
+				"style": {
+					"navigationBarTitleText": "新增"
+				}
+			}, {
+				"path": "/edit",
+				"style": {
+					"navigationBarTitleText": "修改"
+				}
+			}, {
+				"path": "/list",
+				"style": {
+					"navigationBarTitleText": "列表"
+				}
+			}]
+		},
+		// uni-blog
+		{
+			"root": "uni_modules/v587-blog/pages",
+			"pages": [{
+				"path": "/opendb-news-articles/add",
+				"style": {
+					"navigationBarTitleText": "新增"
+				}
+			}, {
+				"path": "/opendb-news-articles/edit",
+				"style": {
+					"navigationBarTitleText": "修改"
+				}
+			}, {
+				"path": "/opendb-news-articles/list",
+				"style": {
+					"navigationBarTitleText": "列表"
+				}
+			},{
+				"path": "/opendb-news-categories/add",
+				"style": {
+					"navigationBarTitleText": "新增"
+				}
+			}, {
+				"path": "/opendb-news-categories/edit",
+				"style": {
+					"navigationBarTitleText": "修改"
+				}
+			}, {
+				"path": "/opendb-news-categories/list",
+				"style": {
+					"navigationBarTitleText": "列表"
+				}
+			},{
+				"path": "/opendb-news-comments/add",
+				"style": {
+					"navigationBarTitleText": "新增"
+				}
+			}, {
+				"path": "/opendb-news-comments/edit",
+				"style": {
+					"navigationBarTitleText": "修改"
+				}
+			}, {
+				"path": "/opendb-news-comments/list",
+				"style": {
+					"navigationBarTitleText": "列表"
+				}
+			},{
+				"path": "/opendb-news-favorite/add",
+				"style": {
+					"navigationBarTitleText": "新增"
+				}
+			}, {
+				"path": "/opendb-news-favorite/edit",
+				"style": {
+					"navigationBarTitleText": "修改"
+				}
+			}, {
+				"path": "/opendb-news-favorite/list",
+				"style": {
+					"navigationBarTitleText": "列表"
+				}
+			}]
+		}
+	],
 	"globalStyle": {
 		"navigationStyle": "custom",
 		"navigationBarTextStyle": "black",

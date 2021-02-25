@@ -1,23 +1,19 @@
 {
-  "id": "v587-theme",
-  "displayName": "主题插件+ i18n国际化",
-  "version": "1.1.0",
-  "description": "主题插件、实现一键换肤、i18n国际化",
+  "id": "v587-blog",
+  "displayName": "v587-blog",
+  "version": "1.0.0",
+  "description": "v587-blog",
   "keywords": [
-    "theme",
-    "主题",
-    "换肤",
-    "i18n",
-    "国际化"
+    "v587-blog"
 ],
-  "repository": "https://github.com/zhouphenix/Uni-v587-admin",
+  "repository": "",
   "engines": {
     "HBuilderX": "^3.1.0"
   },
   "dcloudext": {
     "category": [
-        "JS SDK",
-        "通用 SDK"
+        "uniCloud",
+        "Admin插件"
     ],
     "sale": {
       "regular": {
@@ -31,9 +27,9 @@
       "qq": ""
     },
     "declaration": {
-      "ads": "无",
-      "data": "插件不采集任何数据",
-      "permissions": "无"
+      "ads": "",
+      "data": "",
+      "permissions": ""
     },
     "npmurl": ""
   },
@@ -42,8 +38,8 @@
     "encrypt": [],
     "platforms": {
       "cloud": {
-        "tcb": "y",
-        "aliyun": "y"
+        "tcb": "u",
+        "aliyun": "u"
       },
       "client": {
         "App": {
