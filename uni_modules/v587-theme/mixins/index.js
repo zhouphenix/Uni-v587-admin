@@ -13,7 +13,7 @@ export default {
 		}
 	},
 	computed: {
-		...mapState('theme', ['theme', 'themeList', 'locale', 'localeList', 'localesMap'])
+		...mapState('theme', ['theme', 'themeList', 'locale', 'localeList'])
 	},
 	methods: {
 		onThemeChange(newVal, oldVal) {

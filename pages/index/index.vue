@@ -2,7 +2,7 @@
 	<view>
 		<scroll-view style="padding: 15px;box-sizing: border-box;">
 			<view>sayHi: {{$t('hi')}}</view>
-			<view v-html="$t('home_desc')"></view>
+			<view v-html="$t('home_desc', {adminVersion})"></view>
 			<view>
 				<image :src="`../../static/theme/${theme}/bg_sidebar.jpg`" mode="aspectFill"></image>
 			</view>

@@ -4,6 +4,14 @@ import {
 	KEY_LOCALE
 } from './config.js'
 
+//自定义字符处理函数---- 字符串替换格式化
+    String.prototype.format = function (kwargs) {
+        // 正则表达式是在/ /内表示， 正则后的g表示去this里面匹配所有的字符(执行全局匹配（查找所有匹配而非在找到第一个匹配后停止）)  i表示执行对大小写不敏感的匹配  m表示执行多行匹配
+        return this.replace(/\{(\w+)\}/g,function (k,m) { //k表示匹配到的字符串，m表示匹配到的分组里的值，在正则中用()表示一个分组
+            return kwargs[m]  // 把匹配到的字符串用参数的值替换
+        });
+    };
+
 export default {
 	install(Vue, options = {}) {
 		const {
@@ -38,12 +46,16 @@ export default {
 				store.commit('theme/SET_LOCALE', currentLocale)
 				store.commit('theme/SET_LOCALES_MAP', require(`@/static/i18n/${currentLocale}.js`).default)
 				Object.defineProperty(Vue.prototype, '$t', {
-					value: function(arg) {
-						const rs = store.state.theme.localesMap[arg]
+					value: function(name, args) {
+						console.log('$t:', name, args );
+						let rs = store.state.theme.localesMap[name]
 						if(!rs){
-							console.error(`i18n国际化定义:关键字【${arg}】未定义`);
+							console.error(`i18n国际化定义:关键字【${name}】未定义`);
 						}
-						return rs || arg
+						if (args) {
+							rs = rs.format(args)
+						}
+						return rs || name
 					}
 				})
 				console.log('V587-theme i18n插件加载成功')

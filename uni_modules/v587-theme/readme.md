@@ -158,11 +158,26 @@ import V587Theme from '@/uni_modules/v587-theme/plugin.js'
 Vue.use(V587Theme, {store, theme: 'light', locale: 'zh_CN'})
 ```
 
-+ 步骤二、使用的地方
++ 步骤二、App.vue 或任意使用的地方引入
 
 ```
+import themeMixin from '@/uni_modules/v587-theme/mixins/index.js'
+export default {
+	mixins:[themeMixin]
+}
+
+// 使用
 <view>sayHi: {{$t('hi')}}</view>
 
+```
+
+对于需要格式化文本， 如
+
+```
+home_desc: `内容主体，可自定义内容及样式<text style="color: #666; font-size: 15px;">（ uniCloud admin 当前版本号 {adminVersion},
+				运行到浏览器可在控制台打印信息中查看当前的版本，也可在代码 package.json 中查看）</text>`
+				
+<view v-html="$t('home_desc', {adminVersion})"></view>
 ```
 
 
