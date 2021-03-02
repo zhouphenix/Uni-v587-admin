@@ -1,0 +1,11 @@
+{
+	"subPackages": [{
+		"root": "uni_modules/v587-theme-generator/pages",
+		"pages": [{
+			"path": "/index/index",
+			"style": {
+				"navigationBarTitleText": "主题生成器"
+			}
+		}]
+	}]
+}
