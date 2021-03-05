@@ -1,11 +1,12 @@
 {
   "id": "v587-color-picker",
-  "displayName": "v587-color-picker",
+  "displayName": "color picker 颜色选择器",
   "version": "1.0.0",
   "description": "颜色选择器组件",
   "keywords": [
     "v587",
-    "color-picker"
+    "color-picker",
+    "颜色选择"
 ],
   "repository": "",
   "engines": {
