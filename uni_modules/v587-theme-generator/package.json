@@ -1,10 +1,14 @@
 {
   "id": "v587-theme-generator",
-  "displayName": "v587-theme-generator",
+  "displayName": "主题生成插件",
   "version": "1.0.0",
-  "description": "v587-theme-generator",
+  "description": "为插件 “主题插件+ i18n国际化” 开发的主题生成工具",
   "keywords": [
-    "v587-theme-generator"
+    "theme",
+    "",
+    "主题生成器",
+    "",
+    "uni-admin"
 ],
   "repository": "",
   "engines": {
@@ -24,12 +28,12 @@
       }
     },
     "contact": {
-      "qq": ""
+      "qq": "461862064"
     },
     "declaration": {
-      "ads": "",
-      "data": "",
-      "permissions": ""
+      "ads": "无",
+      "data": "插件不采集任何数据",
+      "permissions": "无"
     },
     "npmurl": ""
   },
@@ -38,8 +42,8 @@
     "encrypt": [],
     "platforms": {
       "cloud": {
-        "tcb": "u",
-        "aliyun": "u"
+        "tcb": "n",
+        "aliyun": "y"
       },
       "client": {
         "App": {
