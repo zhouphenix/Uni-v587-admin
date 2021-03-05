@@ -20,6 +20,7 @@
 	- （Boolean）bordered 边框属性 
 	- （String）size 大小属性mini、small、normal、big、large
 	- （Boolean）pinned 展示，展览模式
+	-  (Boolean) shadowed 阴影
 	
 + 主题样式定制
 + 其他

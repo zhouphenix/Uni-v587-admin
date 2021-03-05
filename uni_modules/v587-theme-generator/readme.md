@@ -8,6 +8,7 @@
 
 ### 1.安装依赖（项目下）
 + 安装file-saver：   `npm install file-saver --save`
++ 依赖组件 [color picker 颜色选择器](https://ext.dcloud.net.cn/plugin?id=4298)
 + 依赖组件库 [v587-ui](https://ext.dcloud.net.cn/plugin?name=v587-ui)
 
 ### 2.配置page
