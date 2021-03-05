@@ -5,6 +5,7 @@
 
 ## 一、[TODO 待处理事务插件](./uni_modules/v587-todo/readme.md)
 ## 二、[一键换肤+I18N国际化插件](./uni_modules/v587-theme/readme.md)
+## 三、[Color Picker 颜色选择器](./uni_modules/v587-color-picker/readme.md)
 
 ## 关注订阅号
 

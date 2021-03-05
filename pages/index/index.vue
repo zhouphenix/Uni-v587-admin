@@ -10,7 +10,7 @@
 			<fix-window />
 			<!-- #endif -->
 		</scroll-view>
-		<v587-todo style="position: fixed;left: 50%;top: 50%;transform: translate(-50%, -50%); min-width: 500px;"></v587-todo>
+		<v587-todo style="position: fixed;left: 50%;top: 50%;transform: translate(-50%, -50%); min-width: 450px;"></v587-todo>
 	</view>
 </template>
 
@@ -18,6 +18,8 @@
 	import {
 		version
 	} from '../../package.json'
+
+
 	import {
 		mapState
 	} from 'vuex'
@@ -31,6 +33,7 @@
 			...mapState('theme', ['theme', 'locale'])
 		},
 		onLoad() {
+
 		},
 		methods: {}
 	}
@@ -43,4 +46,6 @@
 	}
 
 	/* #endif */
+	
+	
 </style>

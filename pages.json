@@ -21,7 +21,16 @@
 			}
 
 		}
-	],
+	    ,{
+            "path" : "uni_modules/v587-theme-generator/pages/index/index",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+    ],
 	"subPackages": [{
 			"root": "pages/system",
 			"pages": [{
@@ -196,6 +205,15 @@
 				"path": "/opendb-news-favorite/list",
 				"style": {
 					"navigationBarTitleText": "列表"
+				}
+			}]
+		},
+		{
+			"root": "uni_modules/v587-theme-generator/pages",
+			"pages": [{
+				"path": "/index/index",
+				"style": {
+					"navigationBarTitleText": "主题生成器"
 				}
 			}]
 		}
