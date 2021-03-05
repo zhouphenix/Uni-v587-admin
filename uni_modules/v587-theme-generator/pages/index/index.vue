@@ -570,7 +570,7 @@
 			border-radius: 5px;
 			position: sticky;
 			right: 0px;
-			top: 0px;
+			top: 0;
 			box-shadow: 0 0 10px 4px rgba($color: #000000, $alpha: 0.1);
 
 			.control-header {

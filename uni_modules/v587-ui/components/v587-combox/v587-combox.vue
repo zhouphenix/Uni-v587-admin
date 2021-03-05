@@ -62,7 +62,7 @@
 				type: [String, Number],
 				default: ''
 			},
-			enableSearch: Boolean,
+			filtered: Boolean,
 			bordered: Boolean
 
 		},
@@ -82,7 +82,7 @@
 				}
 			},
 			filterCandidates() {
-				return this.enableSearch ? this.candidates.filter((item) => {
+				return this.filtered ? this.candidates.filter((item) => {
 					return item.toString().indexOf(this.inputVal) > -1
 				}) : this.candidates
 			},

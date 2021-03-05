@@ -27,6 +27,9 @@ pages.json中subPackages节点中添加
 
 ```
 
+## 3.成品展示
+
+![主题生成器展示图](https://vkceyugu.cdn.bspapp.com/VKCEYUGU-78a67da8-ae76-4f35-8fee-dac7cb24bcd4/ac4337a3-66ac-41e3-8753-6ff52f0675c1.gif)
 
 ## 功能在完善中，体验功能可关注订阅号
 
