@@ -21,21 +21,49 @@ export default {
 		} = options
 		const lastTheme = uni.getStorageSync(KEY_THEME)
 		const lastLocale = uni.getStorageSync(KEY_LOCALE)
-
+		
 		if (store) {
 			store.registerModule('theme', V587Store)
-			// 提取主题文件
-			const themeFiles = require.context('@/static/theme', true, /theme_.*\.css$/)
-			if (themeFiles.keys().length > 0) {
-				// 提取主题名称
-				const THEMES = themeFiles.keys().map(item => item.match(/theme_(.*)\.css$/)[1])
-				store.commit('theme/SET_THEME_LIST', THEMES)
-				store.commit('theme/SET_THEME', lastTheme || theme || THEMES[0])
-				console.log('V587-theme主题插件加载成功')
-			} else {
-				console.warn('未检测到主题文件，请确认主题文件是否放置在/static/theme 目录下');
+			
+			// #ifdef MP
+			function extractMPThemeInfo() {
+				// 提取主题文件
+				const themeFiles = require.context('@/static/theme', true, /theme_.*\.js$/)
+				if (themeFiles.keys().length > 0) {
+					// 提取主题名称
+					const THEMES= themeFiles.keys().map(item => item.match(/theme_(.*)\.js$/)[1])
+					const currentTheme = lastTheme || theme || THEMES[0]
+					store.commit('theme/SET_THEME_LIST', THEMES)
+					store.commit('theme/SET_THEME', currentTheme)
+					store.commit('theme/SET_THEME_MAP', require(`@/static/theme/theme_${currentTheme}.js`).default)
+					console.log('V587-theme主题插件加载成功')
+				} else {
+					console.warn('未检测到主题文件，请确认主题文件是否放置在/static/theme 目录下');
+				}
+				
 			}
-
+			extractMPThemeInfo()
+			// #endif
+			
+			// #ifndef MP
+			function extractThemeInfo() {
+				// 提取主题文件
+				const themeFiles = require.context('@/static/theme', true, /theme_.*\.css$/)
+				if (themeFiles.keys().length > 0) {
+					// 提取主题名称
+					const THEMES = themeFiles.keys().map(item => item.match(/theme_(.*)\.css$/)[1])
+					store.commit('theme/SET_THEME_LIST', THEMES)
+					store.commit('theme/SET_THEME', lastTheme || theme || THEMES[0])
+					console.log('V587-theme主题插件加载成功')
+				} else {
+					console.warn('未检测到主题文件，请确认主题文件是否放置在/static/theme 目录下');
+				}
+			}
+			extractThemeInfo()
+			// #endif
+			
+			console.log("store: ",store.state.theme);
+			
 			// 提取locale 文件
 			const localeFiles = require.context('@/static/i18n', true, /\.js$/)
 			if (localeFiles.keys().length > 0) {

@@ -1,0 +1,8 @@
+[{
+	"menu_id": "v587-ui-sample",
+	"name": "V587 UI Sample",
+	"icon": "",
+	"url": "/uni_modules/v587-ui-sample/pages/index/index",
+	"sort": 800,
+	"permission": []
+}]

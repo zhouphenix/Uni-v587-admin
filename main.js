@@ -11,7 +11,7 @@ Vue.config.productionTip = false
 Vue.use(plugin)
 Vue.use(fullscreen)
 Vue.use(V587Directive)
-Vue.use(V587Theme, {store, theme: 'light'})
+Vue.use(V587Theme, {store, theme: 'light', locale: 'zh_CN'})
 
 App.mpType = 'app'
 

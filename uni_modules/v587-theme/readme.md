@@ -7,12 +7,14 @@
 + logo、背景等图片
 + 其他
 + I18N国际化（由于原理比较简单，所以和一键换肤放在一起）
++ 小程序适配
 
 ## 分析
 + 基本上只有html、css、静态资源层面的东西有改动
 + 后续主体皮肤增加
-+ js文件替换不同于静态资源（如何动态管理？）
++ js文件替换不同于静态资源（如何动态管理？require 直接覆盖）
 + I18N国际化：不同语言放置在不通js目录，后面覆盖前面（而不是全部都加载管理）
++ 小程序拥有诸多限制，采用js处理
 
 一套代码基本足以
 
@@ -23,6 +25,8 @@
 	/static/theme/目录结构
 	│  theme_dark.css
 	│  theme_light.css
+	│  theme_dark.js  // 小程序使用
+	│  theme_light.js // 小程序使用
 	│
 	├─dark
 	│      bg_sidebar.jpg
@@ -40,6 +44,19 @@ theme_dark.css，theme_light.css	分别对应预设的两个主题包， 对应d
 }
 ```
 
+theme_dark.js，theme_light.js	分别对应预设的两个主题包， 对应dark、light资源目录
+
+```
+export default {
+	_primaryColor: '#616161',
+	_sidebarBg: 'url(/static/theme/dark/bg_sidebar.jpg)',
+	'color': 'red'
+}
+```
+
+其中以‘_’开头表示需要转义 ‘--’开头变量,  反之。
+
+
 + 颜色处理：
   css中使用 `primaryColor: #616161;`
 
@@ -49,14 +66,18 @@ theme_dark.css，theme_light.css	分别对应预设的两个主题包， 对应d
   
   html中使用 ```<image :src="`../../static/theme/${theme}/bg_sidebar.jpg`" ></image>```
 	
-	
+  【注意】 小程序背景图： 网络加载 或 base64
 	
 ### 2. 再定义一个变量存储当前主题, 此处使用vuex管理这个状态
 ```
 export default {
 	state: {
-		theme: uni.getStorageSync(KEY_THEME), // 当前主题
-		themeList: [] // 方便管理， 动态读取主题目录的下的主题文件， 方便后续扩展
+		// 当前主题
+		theme: uni.getStorageSync(KEY_THEME),
+		// 支持主题列表， 读取/static/theme/theme_*.css 或 /static/theme/theme_*.js
+		themeList: [], // 方便管理， 动态读取主题目录的下的主题文件， 方便后续扩展
+		// 主题字典
+		themeMap: {},
 	}
 }
 ```
@@ -64,14 +85,25 @@ export default {
 ### 3. 监听主题变化，加载对应主题
 
 ```
+// #ifdef MP
 onThemeChange(newVal, oldVal) {
-		if (this.themeList.includes(oldVal)) {
-			removeCss(`/static/theme/theme_${oldVal}.css`)
-		}
-		if (this.themeList.includes(newVal)) {
-			loadCss(`/static/theme/theme_${newVal}.css`)
-		}
+	if (this.themeList.includes(newVal)) {
+		this.$store.commit('theme/SET_THEME_MAP', require(`@/static/theme/theme_${newVal}.js`).default)
 	}
+},
+// #endif
+
+// #ifndef MP
+onThemeChange(newVal, oldVal) {
+	if (this.themeList.includes(oldVal)) {
+		removeCss(`/static/theme/theme_${oldVal}.css`)
+	}
+	if (this.themeList.includes(newVal)) {
+		loadCss(`/static/theme/theme_${newVal}.css`)
+	}
+},
+// #endif
+		
 ```
 
 ### 4.使用
@@ -91,6 +123,17 @@ import themeMixin from '@/uni_modules/v587-theme/mixins/index.js'
 export default {
 	mixins:[themeMixin]
 }
+```
+
++ 步骤三（小程序）引入样式
+
+```
+computed: {
+	...mapGetters('theme',['themeMap']),
+	}
+	
+// 使用的地方root 节点添加style
+<view class="container" :style="themeMap"></view>
 ```
 
 ## I18N国际化开发

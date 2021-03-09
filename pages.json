@@ -20,17 +20,15 @@
 				"navigationBarTitleText": "修改密码"
 			}
 
+		}, {
+			"path": "uni_modules/v587-theme-generator/pages/index/index",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
 		}
-	    ,{
-            "path" : "uni_modules/v587-theme-generator/pages/index/index",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-    ],
+	],
 	"subPackages": [{
 			"root": "pages/system",
 			"pages": [{
@@ -161,7 +159,7 @@
 				"style": {
 					"navigationBarTitleText": "列表"
 				}
-			},{
+			}, {
 				"path": "/opendb-news-categories/add",
 				"style": {
 					"navigationBarTitleText": "新增"
@@ -176,7 +174,7 @@
 				"style": {
 					"navigationBarTitleText": "列表"
 				}
-			},{
+			}, {
 				"path": "/opendb-news-comments/add",
 				"style": {
 					"navigationBarTitleText": "新增"
@@ -191,7 +189,7 @@
 				"style": {
 					"navigationBarTitleText": "列表"
 				}
-			},{
+			}, {
 				"path": "/opendb-news-favorite/add",
 				"style": {
 					"navigationBarTitleText": "新增"
@@ -208,12 +206,23 @@
 				}
 			}]
 		},
+		// v587-theme-generator
 		{
 			"root": "uni_modules/v587-theme-generator/pages",
 			"pages": [{
 				"path": "/index/index",
 				"style": {
 					"navigationBarTitleText": "主题生成器"
+				}
+			}]
+		},
+		// v587-ui-sample
+		{
+			"root": "uni_modules/v587-ui-sample/pages",
+			"pages": [{
+				"path": "/index/index",
+				"style": {
+					"navigationBarTitleText": "V587 UI展示"
 				}
 			}]
 		}

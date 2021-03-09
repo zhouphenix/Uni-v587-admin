@@ -222,7 +222,8 @@
 			init() {
 				const reg = /^V587\-Theme\d+$/i
 				const last = this.themeList.filter(item => reg.test(item.name)).sort((l, r) => l.name < r.name ? 1 : -1)[0]
-				this.name = `V587-Theme${Number(last.name.replace('V587-Theme', ''))+1}`
+				let suffix = last ? (Number(last.name.replace('V587-Theme', ''))+1) : 1
+				this.name = `V587-Theme${suffix}`
 			},
 			// 滚动到锚点
 			toAnchor(id) {
@@ -299,7 +300,7 @@
 				for(let key in theme.theme){
 					for(let k in theme.theme[key]) {
 						for(let j in theme.theme[key][k]){
-							d.push(`${j}:${theme.theme[key][k][j].value};  //${theme.theme[key][k][j].description}`)
+							d.push(`--${j}:${theme.theme[key][k][j].value};  //${theme.theme[key][k][j].description}`)
 						}
 					}
 				}

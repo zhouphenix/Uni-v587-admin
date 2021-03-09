@@ -1,5 +1,5 @@
 <template>
-	<view>
+	<view class="v587-theme">
 		<scroll-view style="padding: 15px;box-sizing: border-box;">
 			<view>sayHi: {{$t('hi')}}</view>
 			<view v-html="$t('home_desc', {adminVersion})"></view>
@@ -21,7 +21,8 @@
 
 
 	import {
-		mapState
+		mapState,
+		mapGetters
 	} from 'vuex'
 	export default {
 		data() {
@@ -33,9 +34,11 @@
 			...mapState('theme', ['theme', 'locale'])
 		},
 		onLoad() {
-
+			console.log("this.themeMap(): ",this.themeMap());
 		},
-		methods: {}
+		methods: {
+			...mapGetters('theme', ['themeMap'])
+		}
 	}
 </script>
 

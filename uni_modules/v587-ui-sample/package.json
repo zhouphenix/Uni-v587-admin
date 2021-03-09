@@ -1,12 +1,10 @@
 {
-  "id": "v587-color-picker",
-  "displayName": "color picker 颜色选择器",
-  "version": "1.0.1",
-  "description": "颜色选择器组件",
+  "id": "v587-ui-sample",
+  "displayName": "v587-ui组件库 sample展示插件",
+  "version": "1.0.0",
+  "description": "v587 UI Sample",
   "keywords": [
-    "v587",
-    "color-picker",
-    "颜色选择"
+    "v587-ui-sample"
 ],
   "repository": "",
   "engines": {
@@ -14,8 +12,8 @@
   },
   "dcloudext": {
     "category": [
-        "前端组件",
-        "通用组件"
+        "uniCloud",
+        "Admin插件"
     ],
     "sale": {
       "regular": {
@@ -29,9 +27,9 @@
       "qq": ""
     },
     "declaration": {
-      "ads": "无",
-      "data": "插件不采集任何数据",
-      "permissions": "无"
+      "ads": "",
+      "data": "",
+      "permissions": ""
     },
     "npmurl": ""
   },
@@ -40,8 +38,8 @@
     "encrypt": [],
     "platforms": {
       "cloud": {
-        "tcb": "y",
-        "aliyun": "y"
+        "tcb": "u",
+        "aliyun": "u"
       },
       "client": {
         "App": {

@@ -1,6 +1,6 @@
 [{
 	"menu_id": "v587-theme-generator",
-	"name": "显示名称",
+	"name": "V587 主题生成器",
 	"icon": "",
 	"url": "/uni_modules/v587-theme-generator/pages/index/index",
 	"sort": 800,

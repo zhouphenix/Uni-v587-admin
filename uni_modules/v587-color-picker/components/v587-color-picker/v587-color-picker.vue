@@ -1,25 +1,30 @@
 <template>
-	<view class="v587-color-picker" @click.prevent.stop>
-		<view ref="slider" class="sv-picker" @touchstart="setSlider($event, 'sv')" @touchmove="moveSlide($event, 'sv')"
-		 @mousedown="onMouseDown($event, 'sv')">
+	<view class="v587-color-picker" @touchmove.stop.prevent >
+		<view id="slider" ref="slider" class="sv-picker" @touchstart="setSlider($event, 'sv')"
+			@touchmove="moveSlide($event, 'sv')" @mousedown="onMouseDown($event, 'sv')">
 			<view class="sv-picker-background" :style="{backgroundColor: svBackgroundColor}"></view>
-			<view class="sv-picker-background" :style="{background: 'linear-gradient(to right, white, #ffffff00)'}"></view>
-			<view class="sv-picker-background" :style="{background: 'linear-gradient(to top, black, #ffffff00)'}"></view>
-			<view class="sv-slider" :style="svSliderStyle"></view>
+			<view class="sv-picker-background" :style="{background: 'linear-gradient(to right, white, #ffffff00)'}">
+			</view>
+			<view class="sv-picker-background" :style="{background: 'linear-gradient(to top, black, #ffffff00)'}">
+			</view>
+			<view class="sv-slider" :style="{transform: `translate(${saturationSlider - halfSilder}px, ${valueSlider - halfSilder}px)`}"></view>
 		</view>
 
 		<view class="palette">
 			<view class="result-color alpha-background-image" :style="{boxShadow: `0 0 10px ${color}`}">
 				<view class="alpha-background" :style="{background: pickedColor.rgb}"></view>
 			</view>
-			<view ref="sliderBars" class="slider-bars">
-				<view class="hue-slider" @touchstart="setSlider($event, 'hue')" @touchmove="moveSlide($event, 'hue')" @mousedown="onMouseDown($event, 'hue')">
-					<view class="slider" :style="hueSliderStyle" @touchstart="touchSlider($event, 'hue')" @touchmove="moveSlide($event, 'hue')"></view>
+			<view id="sliderBars" ref="sliderBars" class="slider-bars">
+				<view class="hue-slider" @touchstart="setSlider($event, 'hue')" @touchmove="moveSlide($event, 'hue')"
+					@mousedown="onMouseDown($event, 'hue')">
+					<view class="slider" :style="{transform: `translate(${hueSlider - halfSilder/2}px, -50%)`}" @touchstart="touchSlider($event, 'hue')"
+						@touchmove="moveSlide($event, 'hue')"></view>
 				</view>
-				<view class="alpha-slider alpha-background-image" @touchstart="setSlider($event, 'alpha')" @touchmove="moveSlide($event, 'alpha')"
-				 @mousedown="onMouseDown($event, 'alpha')">
+				<view class="alpha-slider alpha-background-image" @touchstart="setSlider($event, 'alpha')"
+					@touchmove="moveSlide($event, 'alpha')" @mousedown="onMouseDown($event, 'alpha')">
 					<view class="alpha-background" :style="{background: alphaBackground}"></view>
-					<view class="slider" :style="alphaSliderStyle" @touchstart="touchSlider($event, 'alpha')" @touchmove="moveSlide($event, 'alpha')"></view>
+					<view class="slider" :style="{transform: `translate(${alphaSlider - halfSilder/2}px, -50%)`}" @touchstart="touchSlider($event, 'alpha')"
+						@touchmove="moveSlide($event, 'alpha')"></view>
 				</view>
 			</view>
 		</view>
@@ -27,25 +32,25 @@
 
 			<view class="result-input">
 				<view class="result-input__item" v-if="mode === 'HEX'">
-					<input type="text" v-model.trim="hexInput" @input="onInput" data-tag='HEX' maxlength="9" />
-					<text>HEX</text>
+					<input class="input" type="text" v-model.trim="hexInput" @input="onInput" data-tag='HEX' maxlength="9" />
+					<text class="text">HEX</text>
 				</view>
 				<template v-else>
 					<view class="result-input__item">
-						<input type="number" v-model.trim="rgbaInput.R" @input="onInput" data-tag='R' maxlength="3" />
-						<text>R</text>
+						<input class="input" type="number" v-model.trim="rgbaInput.R" @input="onInput" data-tag='R' maxlength="3" />
+						<text class="text">R</text>
 					</view>
 					<view class="result-input__item">
-						<input type="number" v-model.trim="rgbaInput.G" @input="onInput" data-tag='G' maxlength="3" />
-						<text>G</text>
+						<input class="input" type="number" v-model.trim="rgbaInput.G" @input="onInput" data-tag='G' maxlength="3" />
+						<text class="text">G</text>
 					</view>
 					<view class="result-input__item">
-						<input type="number" v-model.trim="rgbaInput.B" @input="onInput" data-tag='B' maxlength="3" />
-						<text>B</text>
+						<input class="input" type="number" v-model.trim="rgbaInput.B" @input="onInput" data-tag='B' maxlength="3" />
+						<text class="text">B</text>
 					</view>
 					<view class="result-input__item">
-						<input type="digit" v-model.trim="rgbaInput.A" @input="onInput" data-tag='A' maxlength="3" />
-						<text>A</text>
+						<input class="input" type="digit" v-model.trim="rgbaInput.A" @input="onInput" data-tag='A' maxlength="3" />
+						<text class="text">A</text>
 					</view>
 				</template>
 
@@ -54,7 +59,8 @@
 			<view class="model-button" @click="toggleMode"><text>▲\n▼</text></view>
 		</view>
 		<view class="fav-colors">
-			<view v-for="(value, key) in favColors" :key="key" :style="{background: value}" @click.stop="pick(value)"></view>
+			<view class="fav-colors__item" v-for="(value, key) in favColors" :key="key" :style="{background: value}" @click.stop="pick(value)">
+			</view>
 		</view>
 	</view>
 </template>
@@ -147,13 +153,15 @@
 				const rgb = hsvToRgb(hue, saturation, value)
 				let color
 				if (alpha === 1) {
-					color = { ...rgb,
+					color = {
+						...rgb,
 						a: alpha,
 						rgb: `rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`,
 						hex: rgbaToHex(rgb.r, rgb.g, rgb.b, 255)
 					}
 				} else {
-					color = { ...rgb,
+					color = {
+						...rgb,
 						a: alpha,
 						rgb: `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${Math.round(alpha * 100) / 100})`,
 						hex: rgbaToHex(rgb.r, rgb.g, rgb.b, Math.round(alpha * 255))
@@ -172,21 +180,6 @@
 					b
 				} = this.pickedColor
 				return `linear-gradient(to right, rgba(${r}, ${g}, ${b}, 0),  rgba(${r}, ${g}, ${b}, 1))`
-			},
-			hueSliderStyle() {
-				return {
-					transform: `translate(${this.hueSlider - this.halfSilder/2}px, -50%)`
-				}
-			},
-			alphaSliderStyle() {
-				return {
-					transform: `translate(${this.alphaSlider - this.halfSilder/2}px, -50%)`
-				}
-			},
-			svSliderStyle() {
-				return {
-					transform: `translate(${this.saturationSlider - this.halfSilder}px, ${this.valueSlider - this.halfSilder}px)`
-				}
 			},
 
 			modeHex() {
@@ -217,20 +210,36 @@
 			},
 			// topWindow 高度
 			windowTop() {
-				return uni.getSystemInfoSync().windowTop
+				return uni.getSystemInfoSync().windowTop || 0
 			}
 
 		},
 		methods: {
 			init() {
 				this.initFavColors()
-				const sliderInfo = this.$refs.slider.$el.getBoundingClientRect()
-				this.pickerWidth = sliderInfo.width
-				
-				const sliderBarsInfo = this.$refs.sliderBars.$el.getBoundingClientRect()
-				this.sliderWidth = this.alphaSlider = this.saturationSlider = sliderBarsInfo.width
-				this.sliderBarOffsetX = sliderBarsInfo.x
+				this.getComponentInfo('slider', data=>{
+					this.pickerWidth = data.width
+				})
+				this.getComponentInfo('sliderBars', data=>{
+					this.sliderWidth = this.alphaSlider = this.saturationSlider = data.width
+					this.sliderBarOffsetX = data.left
+				})
 			},
+			
+			getComponentInfo(target, callback){
+				// #ifdef MP && !MP-ALIPAY
+				let query = uni.createSelectorQuery().in(this)
+				query.select(`#${target}`).boundingClientRect(data => {
+				 callback(data)
+				}).exec();
+				// #endif
+				
+				// #ifdef !(MP && !MP-ALIPAY)
+				callback(this.$refs[target].$el.getBoundingClientRect())
+				// #endif
+				
+			},
+			
 			initFavColors() {
 				this.favColors.push('#e54d42') //嫣红
 				this.favColors.push('#f37b1d') //桔橙
@@ -293,7 +302,6 @@
 					pageX,
 					pageY
 				} = (e.touches && e.touches[0]) || e
-
 				if (component === 'sv') {
 					this.startLeft = this.saturationSlider
 					this.startPageX = pageX
@@ -311,7 +319,7 @@
 				} = (e.touches && e.touches[0]) || e
 				if (component === 'sv') {
 					this.setSliderValue('saturation', this.startLeft + pageX - this.startPageX)
-					this.setSliderValue('value', this.startTop + pageY - this.startPageY - (this.isH5 ? this.windowTop : 0))
+					this.setSliderValue('value', this.startTop + pageY - this.startPageY - (this.isH5 ? this.windowTop :0))
 				} else {
 					this.setSliderValue(component, this.startLeft + pageX - this.startPageX)
 				}
@@ -324,19 +332,25 @@
 					pageY
 				} = (e.touches && e.touches[0]) || e
 				if (component === 'sv') {
-					const sliderInfo = this.$refs.slider.$el.getBoundingClientRect()
-					this.setSliderValue('saturation', pageX - sliderInfo.x)
-					this.setSliderValue('value', pageY - sliderInfo.y + this.windowTop)
+					this.getComponentInfo('slider', data=>{
+						console.log("data: ",data);
+						this.setSliderValue('saturation', pageX - data.left)
+						this.setSliderValue('value', pageY - data.top + this.windowTop)
+						this.touchSlider(e, component)
+						this.emitPickedColor()
+					})
+					
 				} else {
 					this.setSliderValue(component, pageX - this.sliderBarOffsetX)
+					this.touchSlider(e, component)
+					this.emitPickedColor()
 				}
 
-				this.touchSlider(e, component)
-
-				this.emitPickedColor()
+				
 			},
 			setSliderValue(component, value) {
-				this[component + 'Slider'] = Math.min(Math.max(value, 0), ['hue', 'alpha'].indexOf(component) !== -1 ? this.sliderWidth :
+				this[component + 'Slider'] = Math.min(Math.max(value, 0), ['hue', 'alpha'].indexOf(component) !== -1 ? this
+					.sliderWidth :
 					this.pickerWidth)
 			},
 			emitPickedColor() {
@@ -368,7 +382,7 @@
 				if (tag === 'HEX') {
 					// 非‘#’开头，切不属于0-9a-fA-F的字符
 					const REG = /(?!^)#|[^#0-9a-fA-F]+/g
-					let s = value.replaceAll(REG, '')
+					let s = value.replace(REG, '')
 					this.$nextTick(_ => this.hexInput = s)
 					if (s.startsWith('#') && [4, 7, 9].indexOf(s.length) > -1) { // 满足#fff、 #ffffff、 #ffffff00
 						this.keyIn = true
@@ -662,7 +676,7 @@
 						margin-left: 10px;
 					}
 
-					input {
+					.input {
 						height: 22px;
 						color: rgb(65, 80, 88);
 						align-self: stretch;
@@ -687,7 +701,7 @@
 
 					}
 
-					text {
+					.text {
 						display: block;
 						line-height: 12px;
 						margin-top: 4px;
@@ -720,7 +734,7 @@
 			justify-content: space-evenly;
 			margin-top: $verticalSpace;
 
-			&>:nth-child(n) {
+			&>.fav-colors__item:nth-child(n) {
 				width: 24px;
 				height: 24px;
 				border: 1px solid rgba($color: #000000, $alpha: 0.1);
@@ -733,11 +747,11 @@
 				}
 			}
 
-			&>:nth-child(even) {
+			&>.fav-colors__item:nth-child(even) {
 				border-radius: 50% 0%;
 			}
 
-			&>:nth-child(odd) {
+			&>.fav-colors__item:nth-child(odd) {
 				border-radius: 0% 50%;
 			}
 		}

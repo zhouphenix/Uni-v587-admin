@@ -62,7 +62,34 @@
 >
 >  有些公司的产品运营总是给不同平台提不同需求，但这不是拒绝uni-app的理由。关键在于项目里，复用的代码多还是个性的代码多，正常都是复用的代码多，所以仍然应该多端。而个性的代码放到不同平台的目录下，差异化维护。
 
+#### 三、 在小程序上适配问题
 
++ css 不支持部分
+> Some selectors are not allowed in component wxss, including tag name selectors, ID selectors, and attribute selectors
+
++ [关于小程序中获取组件boundingClientRect 信息](https://uniapp.dcloud.io/api/ui/nodes-info?id=createselectorquery)
+
+```
+const query = uni.createSelectorQuery().in(this);
+query.select('#id').boundingClientRect(data => {
+  console.log("得到布局位置信息" + JSON.stringify(data));
+  console.log("节点离页面顶部的距离为" + data.top);
+}).exec();
+```
+
+> **注意** 支付宝小程序不支持in(component)，使用无效果
+
++ 阻止事件冒泡:  顶层容器使用  `@touchmove.stop.prevent` 修饰
+
++ 使用方式区别
+```
+<!-- #ifdef MP && !MP-ALIPAY -->
+<v587-color-picker :color="color" @onColorChange="val => color = val"/>
+<!-- #endif -->
+<!-- #ifdef !(MP && !MP-ALIPAY) -->
+<v587-color-picker v-model="color" />
+<!-- #endif -->
+```
 
 ## 关注订阅号
 
