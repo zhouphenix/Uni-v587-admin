@@ -6,9 +6,12 @@
 				<view class="theme-list uni-scrollbar">
 					<view class="theme-item" v-for="(item, index) in themeList" :key="index">
 						<view class="theme-item__preview">
-							<view :style="{backgroundColor: item.theme.Color['Brand Color']['color-primary'].value, width:'100%', height: '50px'}"></view>
+							<view
+								:style="{backgroundColor: item.theme.Color['Brand Color']['color-primary'].value, width:'100%', height: '50px'}">
+							</view>
 							<view style="display: flex;justify-content: space-around;">
-								<view v-for="(it, idx) in item.theme.Color['Functional Color']" :key="idx" :style="{flex: '1', height: '50px', backgroundColor: it.value}"></view>
+								<view v-for="(it, idx) in item.theme.Color['Functional Color']" :key="idx"
+									:style="{flex: '1', height: '50px', backgroundColor: it.value}"></view>
 							</view>
 							<view class="theme-item__action">
 								<view class="item-action__mask">
@@ -27,8 +30,9 @@
 						</view>
 						<view class="theme-item__info">
 							<view class="item-info__title">
-								<view><input ref="input-name" type="text" :class="{'input-edit': item.enableEdit }" :value="item.name"
-									 :disabled="!item.enableEdit" @blur="({detail})  => renameTheme(detail.value, item) " /></view>
+								<view><input ref="input-name" type="text" :class="{'input-edit': item.enableEdit }"
+										:value="item.name" :disabled="!item.enableEdit"
+										@blur="({detail})  => renameTheme(detail.value, item) " /></view>
 								<view class="uni-icons-more-filled item-info__menu">
 									<view class="item-menu">
 										<view @click="enableEdit(item, index)">
@@ -40,7 +44,9 @@
 									</view>
 								</view>
 							</view>
-							<view class="item-info__desc">最近修改 <text>{{new Date(item.date).format('yyyy-MM-dd hh:mm:ss')}}</text></view>
+							<view class="item-info__desc">最近修改
+								<text>{{new Date(item.date).format('yyyy-MM-dd hh:mm:ss')}}</text>
+							</view>
 						</view>
 
 					</view>
@@ -51,7 +57,8 @@
 			<uni-title class="uni-title" type="h3" title="Color" id="Color"></uni-title>
 			<view class="theme-color">
 				<view class="color-box" v-for="(value, key) in themeConfig.Color" :key="key">
-					<view v-for="(v, k) in value" :key="k" :style="{backgroundColor: v.value, color: v.value > '#E4E4E4' ? 'black': 'white'}">
+					<view v-for="(v, k) in value" :key="k"
+						:style="{backgroundColor: v.value, color: v.value > '#E4E4E4' ? 'black': 'white'}">
 						<view class="color-name">{{k.replace(/color-/i, '')}}</view>
 						<view class="color-value">{{v.value}}</view>
 					</view>
@@ -61,7 +68,8 @@
 			<uni-title class="uni-title" type="h3" title="Typography" id="Typography"></uni-title>
 			<view class="theme-typography">
 				<view>
-					<view v-for="(value, key, index) in themeConfig.Typography['Font Size']" :key="key" :style="{fontSize: value.value, marginBottom: '15px'}">
+					<view v-for="(value, key, index) in themeConfig.Typography['Font Size']" :key="key"
+						:style="{fontSize: value.value, marginBottom: '15px'}">
 						Heading{{index + 1}}
 					</view>
 				</view>
@@ -72,7 +80,8 @@
 					<view :style="{'lineHeight': themeConfig.Typography['Line Height']['font-line-height-primary'].value ,
 					 fontWeight: themeConfig.Typography['Font Weight']['font-weight-primary'].value,
 					 fontSize: themeConfig.Typography['Font Size']['font-size-base'].value}">
-						With MySpace becoming more popular every day, there is the constant need to be different. There are millions of
+						With MySpace becoming more popular every day, there is the constant need to be different. There
+						are millions of
 						users. If MySpace layouts are chosen well, then you can enhance your profile a great deal.
 					</view>
 				</view>
@@ -83,9 +92,12 @@
 					<view :style="{'lineHeight': themeConfig.Typography['Line Height']['font-line-height-secondary'].value,
 					 fontWeight: themeConfig.Typography['Font Weight']['font-weight-secondary'].value,
 					 fontSize: themeConfig.Typography['Font Size']['font-size-small'].value}">
-						Computers have become ubiquitous in almost every facet of our lives. At work, desk jockeys spend hours in front
-						of their desktops, while delivery people scan bar codes with handhelds and workers in the field stay in touch
-						with the central office via their notebooks. Computer hardware weaves itself through the fabric of our lives.
+						Computers have become ubiquitous in almost every facet of our lives. At work, desk jockeys spend
+						hours in front
+						of their desktops, while delivery people scan bar codes with handhelds and workers in the field
+						stay in touch
+						with the central office via their notebooks. Computer hardware weaves itself through the fabric
+						of our lives.
 					</view>
 				</view>
 			</view>
@@ -116,7 +128,8 @@
 								<view :style="{background: v.value, width: '100%', height: '100%'}"></view>
 								<text class="color-picker__arrow">﹀</text>
 								<view class="color-picker__pane" v-clickoutside="_=> $set(v, 'show',  false)">
-									<v587-color-picker v-if="v.show" v-model="v.value" @onColorChange="colorChanged = true" />
+									<v587-color-picker v-if="v.show" v-model="v.value"
+										@onColorChange="colorChanged = true" />
 								</view>
 							</view>
 						</view>
@@ -129,7 +142,8 @@
 					<text class="category-name">{{key}}</text>
 					<view class="category-config" v-for="(v,k) in value">
 						<text class="category-config__label">{{k}} ({{v.description}})</text>
-						<v587-combox bordered :candidates="key|filterCandidates" v-model="v.value" @input="typographyChanged = true"></v587-combox>
+						<v587-combox bordered :candidates="key|filterCandidates" v-model="v.value"
+							@input="typographyChanged = true"></v587-combox>
 					</view>
 				</view>
 			</view>
@@ -142,6 +156,7 @@
 <script>
 	import config from '../../config.json'
 	import FileSaver from 'file-saver'
+	import JSZip from 'jszip'
 
 	const KEY_THEME_STORE = 'key_theme-store'
 
@@ -197,16 +212,18 @@
 			hasChanged() {
 				return this.colorChanged || this.typographyChanged
 			}
-			
+
 		},
-		filters:{
-			filterCandidates(key){
-				if(key === 'Font Weight'){
-					return ['normal', 'bold', 'bolder', 'lighter', '100','200','300','400','500','600','700','800','900','inherit']
-				}else if (key === 'Line Height'){
-					return ['1','1.3','1.5','1.7','12px','16px','20px','24px','28px']
-				}else {
-					return [12,13,14,16,18,20,22,28,36,48].map(item=>`${item}px`)
+		filters: {
+			filterCandidates(key) {
+				if (key === 'Font Weight') {
+					return ['normal', 'bold', 'bolder', 'lighter', '100', '200', '300', '400', '500', '600', '700', '800',
+						'900', 'inherit'
+					]
+				} else if (key === 'Line Height') {
+					return ['1', '1.3', '1.5', '1.7', '12px', '16px', '20px', '24px', '28px']
+				} else {
+					return [12, 13, 14, 16, 18, 20, 22, 28, 36, 48].map(item => `${item}px`)
 				}
 			}
 		},
@@ -222,7 +239,7 @@
 			init() {
 				const reg = /^V587\-Theme\d+$/i
 				const last = this.themeList.filter(item => reg.test(item.name)).sort((l, r) => l.name < r.name ? 1 : -1)[0]
-				let suffix = last ? (Number(last.name.replace('V587-Theme', ''))+1) : 1
+				let suffix = last ? (Number(last.name.replace('V587-Theme', '')) + 1) : 1
 				this.name = `V587-Theme${suffix}`
 			},
 			// 滚动到锚点
@@ -257,7 +274,7 @@
 					}
 					this.restore()
 				}
-				
+
 			},
 
 			restore() {
@@ -291,21 +308,42 @@
 				}
 				this.colorChanged = false
 			},
-			downloadTheme(name){
-				const index = this.themeList.findIndex(item=> item.name === name)
-				console.log("downloadTheme: ", name);
-				const theme = index !== -1 ? this.themeList[index] : {name: this.name, theme: this.themeConfig}
+			downloadTheme(name) {
+				const index = this.themeList.findIndex(item => item.name === name)
+				const theme = index !== -1 ? this.themeList[index] : {
+					name: this.name,
+					theme: this.themeConfig
+				}
+				const zip = new JSZip(); // 实例化zip
+				const folder = zip.folder(theme.name); // zip包内的文件夹名字
+
 				const d = []
-				console.log("theme: ",theme);
-				for(let key in theme.theme){
-					for(let k in theme.theme[key]) {
-						for(let j in theme.theme[key][k]){
-							d.push(`--${j}:${theme.theme[key][k][j].value};  //${theme.theme[key][k][j].description}`)
+				const mp = []
+				
+				for (let key in theme.theme) {
+					for (let k in theme.theme[key]) {
+						for (let j in theme.theme[key][k]) {
+							d.push(`--${j}: ${theme.theme[key][k][j].value};  //${theme.theme[key][k][j].description}`)
+							mp.push(`_${j}: ${theme.theme[key][k][j].value},  //${theme.theme[key][k][j].description}`)
 						}
 					}
 				}
-				let blob = new Blob([`:root{\n${d.join('\n')}\n}`], {type: "text/plain;charset=utf-8"});
-				FileSaver.saveAs(blob, `${theme.name}.css`);
+				let blob1 = new Blob([`:root{\n${d.join('\n')}\n}`], {
+					type: "text/plain;charset=utf-8"
+				});
+				let blob2 = new Blob([`export default {\n${mp.join('\n')}\n}`], {
+					type: "text/plain;charset=utf-8"
+				});
+
+				folder.file(`${theme.name}.css`, blob1)
+				folder.file(`${theme.name}.js`, blob2)
+
+				zip.generateAsync({
+						type: "blob"
+					}) // zip下载
+					.then(function(content) {
+						FileSaver.saveAs(content, `${theme.name}.zip`);
+					})
 			}
 		}
 	}
@@ -693,12 +731,12 @@
 	.input-edit {
 		border-bottom: 1px solid red;
 	}
-	
+
 	.uni-title {
 		margin-top: 20px;
 		padding-left: 10px;
 		position: relative;
-		
+
 		&::before {
 			content: ' ';
 			display: inline-block;

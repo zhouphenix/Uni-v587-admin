@@ -2,3 +2,4 @@
 /unpackage
 /*.lock
 /.hbuilderx
+package-lock.json

@@ -1,7 +1,7 @@
 {
   "id": "v587-theme-generator",
   "displayName": "主题生成插件",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "为插件 “主题插件+ i18n国际化” 开发的主题生成工具",
   "keywords": [
     "theme",

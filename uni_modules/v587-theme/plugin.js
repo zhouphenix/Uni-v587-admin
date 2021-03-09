@@ -62,8 +62,6 @@ export default {
 			extractThemeInfo()
 			// #endif
 			
-			console.log("store: ",store.state.theme);
-			
 			// 提取locale 文件
 			const localeFiles = require.context('@/static/i18n', true, /\.js$/)
 			if (localeFiles.keys().length > 0) {

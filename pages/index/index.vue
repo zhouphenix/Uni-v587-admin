@@ -34,7 +34,6 @@
 			...mapState('theme', ['theme', 'locale'])
 		},
 		onLoad() {
-			console.log("this.themeMap(): ",this.themeMap());
 		},
 		methods: {
 			...mapGetters('theme', ['themeMap'])

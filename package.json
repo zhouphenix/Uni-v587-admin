@@ -25,6 +25,7 @@
     "homepage": "https://github.com/dcloudio/uni-template-admin#readme",
     "dependencies": {
         "file-saver": "^2.0.5",
+        "jszip": "^3.6.0",
         "vue-fullscreen": "^2.2.0"
     },
     "id": "uni-template-admin"
