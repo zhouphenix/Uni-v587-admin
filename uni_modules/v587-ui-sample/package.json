@@ -2,9 +2,12 @@
   "id": "v587-ui-sample",
   "displayName": "v587-ui组件库 sample展示插件",
   "version": "1.0.0",
-  "description": "v587 UI Sample",
+  "description": "v587 UI 展示sample项目",
   "keywords": [
-    "v587-ui-sample"
+    "v587-ui",
+    "",
+    "sample",
+    "demo"
 ],
   "repository": "",
   "engines": {
@@ -24,12 +27,12 @@
       }
     },
     "contact": {
-      "qq": ""
+      "qq": "461862064"
     },
     "declaration": {
-      "ads": "",
-      "data": "",
-      "permissions": ""
+      "ads": "无",
+      "data": "插件不采集任何数据",
+      "permissions": "无"
     },
     "npmurl": ""
   },
@@ -38,8 +41,8 @@
     "encrypt": [],
     "platforms": {
       "cloud": {
-        "tcb": "u",
-        "aliyun": "u"
+        "tcb": "n",
+        "aliyun": "y"
       },
       "client": {
         "App": {

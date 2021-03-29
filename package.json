@@ -1,6 +1,7 @@
 {
     "name": "uniCloud admin 基础框架",
-    "version": "1.3.1",
+    "id": "uni-template-admin",
+    "version": "1.3.5",
     "description": "uniCloud admin，是基于uni-app和uniCloud的应用后台管理框架",
     "main": "main.js",
     "scripts": {
@@ -12,7 +13,6 @@
     },
     "keywords": [
         "admin",
-        "uni-admin",
         "uniCloud",
         "管理后台",
         "云后台"
@@ -27,6 +27,5 @@
         "file-saver": "^2.0.5",
         "jszip": "^3.6.0",
         "vue-fullscreen": "^2.2.0"
-    },
-    "id": "uni-template-admin"
+    }
 }

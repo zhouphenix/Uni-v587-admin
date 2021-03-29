@@ -7,7 +7,8 @@
 			"color-success": {"value": "#67C23A","description": "成功颜色"},
 			"color-warning": {"value":"#E6A23C" , "description": "警告颜色"},
 			"color-danger":  {"value": "#F56C6C", "description": "危险颜色"},
-			"color-info": {"value": "#909399", "description": "信息颜色"}
+			"color-info": {"value": "#909399", "description": "信息颜色"},
+			"color-disabled": {"value": "#c0c4cc", "description": "禁止颜色"}
 		},
 		"Font Color": {
 			"color-text-primary": {"value": "#303133","description": "主要文字颜色"},

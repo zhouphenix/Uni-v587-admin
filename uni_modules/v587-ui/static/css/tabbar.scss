@@ -1,0 +1,58 @@
+.v587-tabbar {
+	/* #ifndef MP-TOUTIAO */
+	display: flex;
+	/* #endif */
+	width: 100%;
+	z-index: 100;
+	position: relative;
+	border-top-width: 1rpx;
+	border-top-style: solid;
+	padding-bottom: env(safe-area-inset-bottom);
+
+	v587-tabbar-item {
+		flex: 1;
+	}
+
+	&-item {
+		display: inline-flex;
+		justify-content: center;
+		align-items: center;
+		height: 100%;
+		width: 100%;
+		box-sizing: border-box;
+		position: relative;
+		float: left;
+
+		&__block {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+		}
+
+		&__label {
+			font-size: 24rpx;
+		}
+
+		&__image {
+			&.selected-icon-path {
+				display: none;
+			}
+		}
+
+		.v587-badge {
+			padding: 3rpx 10rpx;
+		}
+
+		&.is-active {
+			.v587-tabbar-item__image {
+				&.selected-icon-path {
+					display: block;
+				}
+
+				&.icon-path {
+					display: none;
+				}
+			}
+		}
+	}
+}

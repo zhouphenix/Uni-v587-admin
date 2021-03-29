@@ -225,6 +225,16 @@
 					"navigationBarTitleText": "V587 UI展示"
 				}
 			}]
+		},
+		// v587-snapshot
+		{
+			"root": "uni_modules/v587-snapshot/pages",
+			"pages": [{
+				"path": "/index/index",
+				"style": {
+					"navigationBarTitleText": "V587 Snapshot快照"
+				}
+			}]
 		}
 	],
 	"globalStyle": {

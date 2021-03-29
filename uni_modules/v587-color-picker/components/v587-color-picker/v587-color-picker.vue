@@ -1,5 +1,5 @@
 <template>
-	<view class="v587-color-picker" @touchmove.stop.prevent >
+	<view class="v587-color-picker" @touchmove.stop.prevent>
 		<view id="slider" ref="slider" class="sv-picker" @touchstart="setSlider($event, 'sv')"
 			@touchmove="moveSlide($event, 'sv')" @mousedown="onMouseDown($event, 'sv')">
 			<view class="sv-picker-background" :style="{backgroundColor: svBackgroundColor}"></view>
@@ -7,7 +7,9 @@
 			</view>
 			<view class="sv-picker-background" :style="{background: 'linear-gradient(to top, black, #ffffff00)'}">
 			</view>
-			<view class="sv-slider" :style="{transform: `translate(${saturationSlider - halfSilder}px, ${valueSlider - halfSilder}px)`}"></view>
+			<view class="sv-slider"
+				:style="{transform: `translate(${saturationSlider - halfSilder}px, ${valueSlider - halfSilder}px)`}">
+			</view>
 		</view>
 
 		<view class="palette">
@@ -17,14 +19,14 @@
 			<view id="sliderBars" ref="sliderBars" class="slider-bars">
 				<view class="hue-slider" @touchstart="setSlider($event, 'hue')" @touchmove="moveSlide($event, 'hue')"
 					@mousedown="onMouseDown($event, 'hue')">
-					<view class="slider" :style="{transform: `translate(${hueSlider - halfSilder/2}px, -50%)`}" @touchstart="touchSlider($event, 'hue')"
-						@touchmove="moveSlide($event, 'hue')"></view>
+					<view class="slider" :style="{transform: `translate(${hueSlider - halfSilder/2}px, -50%)`}"
+						@touchstart="touchSlider($event, 'hue')" @touchmove="moveSlide($event, 'hue')"></view>
 				</view>
 				<view class="alpha-slider alpha-background-image" @touchstart="setSlider($event, 'alpha')"
 					@touchmove="moveSlide($event, 'alpha')" @mousedown="onMouseDown($event, 'alpha')">
 					<view class="alpha-background" :style="{background: alphaBackground}"></view>
-					<view class="slider" :style="{transform: `translate(${alphaSlider - halfSilder/2}px, -50%)`}" @touchstart="touchSlider($event, 'alpha')"
-						@touchmove="moveSlide($event, 'alpha')"></view>
+					<view class="slider" :style="{transform: `translate(${alphaSlider - halfSilder/2}px, -50%)`}"
+						@touchstart="touchSlider($event, 'alpha')" @touchmove="moveSlide($event, 'alpha')"></view>
 				</view>
 			</view>
 		</view>
@@ -32,24 +34,29 @@
 
 			<view class="result-input">
 				<view class="result-input__item" v-if="mode === 'HEX'">
-					<input class="input" type="text" v-model.trim="hexInput" @input="onInput" data-tag='HEX' maxlength="9" />
+					<input class="input" type="text" v-model.trim="hexInput" @input="onInput" data-tag='HEX'
+						maxlength="9" />
 					<text class="text">HEX</text>
 				</view>
 				<template v-else>
 					<view class="result-input__item">
-						<input class="input" type="number" v-model.trim="rgbaInput.R" @input="onInput" data-tag='R' maxlength="3" />
+						<input class="input" type="number" v-model.trim="rgbaInput.R" @input="onInput" data-tag='R'
+							maxlength="3" />
 						<text class="text">R</text>
 					</view>
 					<view class="result-input__item">
-						<input class="input" type="number" v-model.trim="rgbaInput.G" @input="onInput" data-tag='G' maxlength="3" />
+						<input class="input" type="number" v-model.trim="rgbaInput.G" @input="onInput" data-tag='G'
+							maxlength="3" />
 						<text class="text">G</text>
 					</view>
 					<view class="result-input__item">
-						<input class="input" type="number" v-model.trim="rgbaInput.B" @input="onInput" data-tag='B' maxlength="3" />
+						<input class="input" type="number" v-model.trim="rgbaInput.B" @input="onInput" data-tag='B'
+							maxlength="3" />
 						<text class="text">B</text>
 					</view>
 					<view class="result-input__item">
-						<input class="input" type="digit" v-model.trim="rgbaInput.A" @input="onInput" data-tag='A' maxlength="3" />
+						<input class="input" type="digit" v-model.trim="rgbaInput.A" @input="onInput" data-tag='A'
+							maxlength="3" />
 						<text class="text">A</text>
 					</view>
 				</template>
@@ -59,7 +66,8 @@
 			<view class="model-button" @click="toggleMode"><text>▲\n▼</text></view>
 		</view>
 		<view class="fav-colors">
-			<view class="fav-colors__item" v-for="(value, key) in favColors" :key="key" :style="{background: value}" @click.stop="pick(value)">
+			<view class="fav-colors__item" v-for="(value, key) in favColors" :key="key" :style="{background: value}"
+				@click.stop="pick(value)">
 			</view>
 		</view>
 	</view>
@@ -217,29 +225,33 @@
 		methods: {
 			init() {
 				this.initFavColors()
-				this.getComponentInfo('slider', data=>{
+				this.getComponentInfo('slider', data => {
 					this.pickerWidth = data.width
 				})
-				this.getComponentInfo('sliderBars', data=>{
+				this.getComponentInfo('sliderBars', data => {
 					this.sliderWidth = this.alphaSlider = this.saturationSlider = data.width
 					this.sliderBarOffsetX = data.left
 				})
 			},
-			
-			getComponentInfo(target, callback){
-				// #ifdef MP && !MP-ALIPAY
-				let query = uni.createSelectorQuery().in(this)
-				query.select(`#${target}`).boundingClientRect(data => {
-				 callback(data)
-				}).exec();
+
+			getComponentInfo(target, callback) {
+				// #ifdef MP
+				uni.createSelectorQuery()
+					// #ifndef MP-ALIPAY
+					.in(this)
+					// #endif
+					.select(`#${target}`)
+					.boundingClientRect(data => {
+						callback(data)
+					}).exec();
 				// #endif
-				
-				// #ifdef !(MP && !MP-ALIPAY)
+
+				// #ifndef MP
 				callback(this.$refs[target].$el.getBoundingClientRect())
 				// #endif
-				
+
 			},
-			
+
 			initFavColors() {
 				this.favColors.push('#e54d42') //嫣红
 				this.favColors.push('#f37b1d') //桔橙
@@ -319,7 +331,8 @@
 				} = (e.touches && e.touches[0]) || e
 				if (component === 'sv') {
 					this.setSliderValue('saturation', this.startLeft + pageX - this.startPageX)
-					this.setSliderValue('value', this.startTop + pageY - this.startPageY - (this.isH5 ? this.windowTop :0))
+					this.setSliderValue('value', this.startTop + pageY - this.startPageY - (this.isH5 ? this.windowTop :
+						0))
 				} else {
 					this.setSliderValue(component, this.startLeft + pageX - this.startPageX)
 				}
@@ -332,21 +345,21 @@
 					pageY
 				} = (e.touches && e.touches[0]) || e
 				if (component === 'sv') {
-					this.getComponentInfo('slider', data=>{
-						console.log("data: ",data);
+					this.getComponentInfo('slider', data => {
+						console.log("data: ", data);
 						this.setSliderValue('saturation', pageX - data.left)
 						this.setSliderValue('value', pageY - data.top + this.windowTop)
 						this.touchSlider(e, component)
 						this.emitPickedColor()
 					})
-					
+
 				} else {
 					this.setSliderValue(component, pageX - this.sliderBarOffsetX)
 					this.touchSlider(e, component)
 					this.emitPickedColor()
 				}
 
-				
+
 			},
 			setSliderValue(component, value) {
 				this[component + 'Slider'] = Math.min(Math.max(value, 0), ['hue', 'alpha'].indexOf(component) !== -1 ? this

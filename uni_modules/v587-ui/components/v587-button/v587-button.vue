@@ -1,6 +1,6 @@
 <template>
 	<button
-		class="cl-button"
+		class="v587-button"
 		:class="[classList]"
 		:size="size"
 		:type="type"
@@ -25,22 +25,22 @@
 		@launchapp="launchapp"
 		@tap.stop="tap"
 	>
-		<view class="cl-button__loading">
-			<cl-loading
+		<view class="v587-button__loading">
+			<v587-loading
 				v-if="loading"
 				:size="16"
 				:color="type ? '#fff' : ''"
 				:theme="loadingTheme"
-			></cl-loading>
+			></v587-loading>
 
-			<text class="cl-button__loading-text" v-if="loadingText && loadingMask">{{
+			<text class="v587-button__loading-text" v-if="loadingText && loadingMask">{{
 				loadingText
 			}}</text>
 		</view>
 
-		<text :class="['cl-button__icon', icon]" v-if="icon"></text>
+		<text :class="['v587-button__icon', icon]" v-if="icon"></text>
 
-		<view class="cl-button__text">
+		<view class="v587-button__text">
 			<slot></slot>
 		</view>
 	</button>
@@ -128,11 +128,11 @@ export default {
 			let list = [];
 
 			if (this.type) {
-				list.push(`cl-button--${this.type}`);
+				list.push(`v587-button--${this.type}`);
 			}
 
 			if (this.size) {
-				list.push(`cl-button--${this.size}`);
+				list.push(`v587-button--${this.size}`);
 			}
 
 			if (this.platform) {

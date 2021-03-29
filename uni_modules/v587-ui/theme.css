@@ -1,0 +1,29 @@
+:root{
+--color-primary: #409EFF;  //主题色
+--color-success: #67C23A;  //成功颜色
+--color-warning: #E6A23C;  //警告颜色
+--color-danger: #F56C6C;  //危险颜色
+--color-info: #909399;  //信息颜色
+--color-disabled: #c0c4cc; // disabled 颜色
+--color-text-primary: #303133;  //主要文字颜色
+--color-text-regular: #606266;  //常规文字颜色
+--color-text-secondary: #909399;  //次要文字颜色
+--color-text-placeholder: #C0C4CC;  //占位文字颜色
+--border-color-base: #DCDFE6;  //一级边框颜色
+--border-color-light: #E4E7ED;  //二级边框颜色
+--border-color-lighter: #EBEEF5;  //三级边框颜色
+--border-color-extra-light: #F2F6FC;  //四级边框颜色
+--color-white: #FFFFFF;  //基础白色
+--color-black: #000000;  //基础黑色
+--background-color-base: #F5F7FA;  //基础背景色
+--font-size-extra-large: 20px;  //主标题文字大小
+--font-size-large: 18px;  //标题文字大小
+--font-size-medium: 16px;  //小标题文字大小
+--font-size-base: 14px;  //正文文字大小
+--font-size-small: 13px;  //正文（小）文字大小
+--font-size-extra-small: 12px;  //辅助文字大小
+--font-weight-primary: 500;  //主要文字粗细
+--font-weight-secondary: 100;  //次要文字粗细
+--font-line-height-primary: 24px;  //主要文字行高
+--font-line-height-secondary: 16px;  //次要文字行高
+}

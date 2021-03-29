@@ -1,10 +1,9 @@
 <template>
 	<scroll-view class="sidebar" scroll-y="true">
-		<!-- 		<uni-data-menu v-model="current" collection="opendb-admin-menus" gettree field="url as value, name as text, menu_id, icon" orderby="sort asc" active-text-color="#409eff">
+<!-- 		<uni-data-menu v-model="current" collection="opendb-admin-menus" gettree field="url as value, name as text, menu_id, icon" orderby="sort asc" active-text-color="#409eff">
 			<uni-menu-sidebar :data="staticMenu"></uni-menu-sidebar>
 		</uni-data-menu> -->
-		<uni-nav-menu :uniqueOpened="true" :active="active" activeKey="url" activeTextColor="#409eff" @select="select"
-		 backgroundColor="transparent">
+		<uni-nav-menu :uniqueOpened="true" :active="splitFullPath(active)" activeKey="url" textColor="#666" activeTextColor="#409eff" @select="select" backgroundColor="transparent">
 			<uni-menu-sidebar :data="navMenu"></uni-menu-sidebar>
 			<uni-menu-sidebar :data="staticMenu"></uni-menu-sidebar>
 		</uni-nav-menu>
@@ -14,6 +13,7 @@
 				<span>{{$t('theme')}}</span>
 				<view class="theme-choice">
 					<span v-for="item in themeList" :class="{'theme-active': theme === item}" @click="setTheme(item)">{{item}}</span>
+					<span :class="{'theme-active': !theme}" @click="setTheme('')">默认</span>
 				</view>
 			</view>
 			<view class="uni-icons-star-filled theme-toggle">
@@ -49,8 +49,8 @@
 			$route: {
 				immediate: true,
 				handler(newRoute, oldRoute) {
-					if (newRoute.path !== (oldRoute && oldRoute.path)) {
-						this.changeMenuActive(newRoute.path)
+					if (newRoute.fullPath !== (oldRoute && oldRoute.fullPath)) {
+						this.changeMenuActive(newRoute.fullPath)
 					}
 				}
 			},
@@ -68,6 +68,7 @@
 			}),
 			select(e) {
 				let url = e.url
+
 				if (!url) {
 					url = this.active
 					this.current = url
@@ -97,7 +98,10 @@
 					}
 				})
 			},
-
+			splitFullPath(path) {
+				if (!path) path = '/'
+				return path.split('?')[0]
+			},
 			setTheme(theme) {
 				this.$store.commit('theme/SET_THEME', theme)
 			},
@@ -109,7 +113,7 @@
 	}
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 	.sidebar {
 		position: fixed;
 		top: var(--top-window-height);
@@ -117,6 +121,7 @@
 		height: calc(100vh - (var(--top-window-height)));
 		box-sizing: border-box;
 		border-right: 1px solid darken($left-window-bg-color, 8%);
+		//background-color: $left-window-bg-color;
 		padding-bottom: 10px;
 		background: var(--sidebarBg) no-repeat 0 0;
 		background-position: center 0;
@@ -171,7 +176,7 @@
 		}
 
 		.theme-active {
-			color: var(--primaryColor);
+			color: var(--color-primary);
 			font-weight: 500;
 		}
 	}

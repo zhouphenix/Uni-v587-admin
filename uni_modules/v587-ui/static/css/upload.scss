@@ -1,0 +1,60 @@
+.v587-upload-list {
+	display: flex;
+	flex-wrap: wrap;
+
+	.v587-upload {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		border-radius: 10rpx;
+		border-width: 1rpx;
+		border-style: dashed;
+		border-color: #d9d9d9;
+		box-sizing: border-box;
+		position: relative;
+		margin-right: 20rpx;
+		margin-bottom: 20rpx;
+
+		.v587-upload__add {
+			font-size: 50rpx;
+			color: #8c939d;
+		}
+
+		&__target {
+			height: 100%;
+			width: 100%;
+			border-radius: 10rpx;
+		}
+
+		&__remove {
+			position: absolute;
+			right: 10rpx;
+			top: 10rpx;
+			color: var(--color-danger);
+			z-index: 1;
+			line-height: normal;
+			font-size: 40rpx;
+		}
+	}
+
+	&:not(.is-disabled) {
+		.v587-upload {
+			&:active {
+				border-color: var(--color-primary);
+				.v587-upload__add {
+					color: var(--color-primary);
+				}
+			}
+		}
+	}
+
+	&.is-disabled {
+		.v587-upload {
+			background-color: #f5f7fa;
+
+			.v587-upload__add {
+				transform: rotate(45deg);
+			}
+		}
+	}
+}

@@ -1,8 +1,8 @@
 {
   "id": "v587-theme",
   "displayName": "主题插件+ i18n国际化",
-  "version": "1.1.2",
-  "description": "主题插件、实现一键换肤、i18n国际化",
+  "version": "1.1.6",
+  "description": "【理论上各个平台都适用】主题插件、实现一键换肤、i18n国际化",
   "keywords": [
     "theme",
     "主题",

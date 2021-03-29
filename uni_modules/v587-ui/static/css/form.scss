@@ -1,0 +1,165 @@
+.v587-form {
+	.v587-form-item {
+		min-height: 70rpx;
+		padding: 20rpx 0;
+		position: relative;
+
+		&--required {
+			.v587-form-item__label::before {
+				content: "*";
+				color: var(--color-danger);
+				margin-right: 10rpx;
+			}
+		}
+
+		&--suffix {
+			.v587-form-item__content {
+				margin-right: 20rpx;
+			}
+		}
+
+		&__container {
+			display: flex;
+
+			&:first-child {
+				padding-left: 180rpx;
+			}
+		}
+
+		&__label {
+			padding: 0 20rpx 0 0;
+			font-size: 28rpx;
+			text-align: right;
+			vertical-align: middle;
+			float: left;
+			line-height: 70rpx;
+		}
+
+		&__content {
+			/* #ifndef MP-TOUTIAO */
+			display: flex;
+			/* #endif */
+
+			flex: 1;
+			font-size: 26rpx;
+			line-height: 70rpx;
+
+			&.is-justify-center {
+				justify-content: center;
+
+				/* #ifdef MP-TOUTIAO */
+				text-align: left;
+				/* #endif */
+
+				picker {
+					text-align: center;
+				}
+			}
+
+			&.is-justify-end {
+				justify-content: flex-end;
+
+				/* #ifdef MP-TOUTIAO */
+				text-align: right;
+				/* #endif */
+
+				picker {
+					text-align: right;
+				}
+			}
+
+			&.is-justify-space-between {
+				justify-content: space-between;
+			}
+
+			&.is-justify-space-around {
+				justify-content: space-around;
+			}
+
+			picker {
+				font-size: 26rpx;
+			}
+
+			label {
+				font-size: 26rpx;
+
+				switch,
+				radio,
+				checkbox {
+					margin-right: 14rpx;
+				}
+
+				radio,
+				checkbox {
+					top: -2rpx;
+				}
+
+				switch {
+					top: -4rpx;
+				}
+			}
+
+			checkbox-group,
+			radio-group {
+				label {
+					padding-right: 30rpx;
+				}
+			}
+
+			v587-textarea,
+			v587-select-region,
+			v587-select,
+			v587-input {
+				width: 100%;
+			}
+		}
+
+		&__message {
+			display: block;
+			color: var(--color-danger);
+			font-size: 24rpx;
+			text-align: right;
+			margin-top: 6rpx;
+		}
+
+		&__suffix {
+			display: flex;
+			align-items: center;
+			font-size: 26rpx;
+
+			i {
+				display: inline-block;
+			}
+		}
+	}
+
+	.v587-form-item {
+		&--top {
+			padding: 0 0 20rpx 0;
+
+			.v587-form-item__label {
+				padding: 0 0 10rpx 0;
+				float: none;
+				text-align: left;
+			}
+		}
+
+		&--left {
+			.v587-form-item__label {
+				text-align: left;
+			}
+		}
+
+		&--right {
+			.v587-form-item__label {
+				text-align: right;
+			}
+		}
+	}
+
+	&--border {
+		.v587-form-item {
+			border-bottom: 1rpx solid #eee;
+		}
+	}
+}

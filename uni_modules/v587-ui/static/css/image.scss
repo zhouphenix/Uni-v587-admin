@@ -1,0 +1,40 @@
+.v587-image {
+	flex-shrink: 0;
+
+	&__target {
+		height: 100%;
+		width: 100%;
+		max-height: 100%;
+		max-width: 100%;
+	}
+
+	&__placeholder {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		height: 100%;
+		width: 100%;
+	}
+
+	.v587-icon-image {
+		font-size: 40rpx;
+	}
+
+	&__error {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		height: 100%;
+		width: 100%;
+		font-size: 24rpx;
+		text-align: center;
+	}
+
+	&.is-round {
+		.v587-image__placeholder,
+		.v587-image__error,
+		.v587-image__target {
+			border-radius: 100%;
+		}
+	}
+}

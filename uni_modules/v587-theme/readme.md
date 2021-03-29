@@ -48,14 +48,18 @@ theme_dark.js，theme_light.js	分别对应预设的两个主题包， 对应dar
 
 ```
 export default {
-	_primaryColor: '#616161',
-	_sidebarBg: 'url(/static/theme/dark/bg_sidebar.jpg)',
+	'--primaryColor': '#616161',
+	'--sidebarBg': 'url(/static/theme/dark/bg_sidebar.jpg)',
 	'color': 'red'
 }
 ```
 
-其中以‘_’开头表示需要转义 ‘--’开头变量,  反之。
 
+
+~~其中以‘_’开头表示需要转义 ‘--’开头变量,  反之。~~  
+【变更】： 为了命名上统一， theme_dark.js，theme_light.js中参数命名统一使用 英文字符`“ ' ” `包裹
+
+额外
 
 + 颜色处理：
   css中使用 `primaryColor: #616161;`
@@ -65,6 +69,8 @@ export default {
   css中使用 `background: var(--sidebarBg) no-repeat 0 0;` 
   
   html中使用 ```<image :src="`../../static/theme/${theme}/bg_sidebar.jpg`" ></image>```
+  
+  属性中使用 ``` background-color="var(--color-primary)"  ```
 	
   【注意】 小程序背景图： 网络加载 或 base64
 	
@@ -95,11 +101,12 @@ onThemeChange(newVal, oldVal) {
 
 // #ifndef MP
 onThemeChange(newVal, oldVal) {
-	if (this.themeList.includes(oldVal)) {
-		removeCss(`/static/theme/theme_${oldVal}.css`)
-	}
+	// 修改顺序， 防止切换过程中 当前主题 -> 默认主题（异常过程） -> 目标主题
 	if (this.themeList.includes(newVal)) {
 		loadCss(`/static/theme/theme_${newVal}.css`)
+	}
+	if (this.themeList.includes(oldVal)) {
+		removeCss(`/static/theme/theme_${oldVal}.css`)
 	}
 },
 // #endif
@@ -135,6 +142,30 @@ computed: {
 // 使用的地方root 节点添加style
 <view class="container" :style="themeMap"></view>
 ```
+
+### 5.默认主题
+
+默认主题： `store.theme.theme` 不设置 或 设置为空 
+
+如何扩展？
+
+可以在app.vue 中 配置扩展主题样式， 如
+
+```
+<style>
+	:root {
+		--sidebarBg: url(/static/my_theme/bg_sidebar.jpg);
+	}
+</style>
+```
+
+
+### 受限
+
+对sass/scss 支持上
+
+scss 函数上（如rgba）无法识别var(--arg)传参  ：SassError: argument `$color` of `rgba($color, $alpha)` must be a color
+
 
 ## I18N国际化开发
 
@@ -229,6 +260,8 @@ home_desc: `内容主体，可自定义内容及样式<text style="color: #666; 
 ![一键换肤效果图](https://vkceyugu.cdn.bspapp.com/VKCEYUGU-78a67da8-ae76-4f35-8fee-dac7cb24bcd4/69719962-dac3-4b1b-8dac-89163421fc17.gif)
 
 ![i18n国际化效果图](https://vkceyugu.cdn.bspapp.com/VKCEYUGU-78a67da8-ae76-4f35-8fee-dac7cb24bcd4/bae3ac06-9cd9-488f-9359-ef58a4bf3f58.gif)
+
+![主题生成器结合组件库展示图](https://vkceyugu.cdn.bspapp.com/VKCEYUGU-78a67da8-ae76-4f35-8fee-dac7cb24bcd4/2940eb41-b2bf-489a-acd7-096eebd1b5d3.gif)
 
 ## 关注订阅号
 

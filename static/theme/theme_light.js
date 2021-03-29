@@ -1,4 +1,29 @@
 export default {
-	primaryColor: 'white',
-	sidebarBg: 'url(/static/theme/light/bg_sidebar.jpg)'
+	'--color-primary'': '#e54d42', /* 注释 */
+	'--color-success': '#39b54a', 
+	'--color-warning': '#fbbd08',
+	'--color-danger': '#e03997', 
+	'--color-info': '#8799a3', 
+	'--color-text-primary': '#303133', 
+	'--color-text-regular': '#606266', 
+	'--color-text-secondary': '#909399',
+	'--color-text-placeholder': '#C0C4CC', 
+	'--border-color-base': '#DCDFE6', 
+	'--border-color-light': '#E4E7ED',
+	'--border-color-lighter': '#EBEEF5', 
+	'--border-color-extra-light': '#F2F6FC',
+	'--color-white': '#FFFFFF',
+	'--color-black': '#000000',
+	'--background-color-base': '#F5F7FA', 
+	'--font-size-extra-large': '20px', 
+	'--font-size-large': '18px', 
+	'--font-size-medium': '16px',
+	'--font-size-base': '14px', 
+	'--font-size-small': '13px',
+	'--font-size-extra-small': '12px', 
+	'--font-weight-primary': '500', 
+	'--font-weight-secondary': '100', 
+	'--font-line-height-primary': '24px', 
+	'--font-line-height-secondary': '16px', 
+	'--sidebarBg': 'url(/static/theme/light/bg_sidebar.jpg)'
 }

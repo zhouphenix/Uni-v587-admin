@@ -112,12 +112,12 @@
 					<button type="default" size="mini" @click="save" :disabled="!hasChanged">保存</button>
 					<button type="primary" size="mini" @click="downloadTheme(name)">下载</button>
 				</view>
-				<v587-combox label="" :candidates="classifies" v-model="classify" @input="selectClassify"></v587-combox>
+				<v587-select :options="classifies" v-model="classify" @change="selectClassify"></v587-select>
 				<view class="line"> </view>
 			</view>
 
 
-			<view v-if="classify === 'Color'" class="control-content uni-scrollbar">
+			<view v-if="classify === 0" class="control-content uni-scrollbar">
 				<view class="category" v-for="(value, key) in colors" :key="key">
 					<text class="category-name">{{key}}</text>
 					<view class="category-config" v-for="(v,k) in value">
@@ -137,13 +137,13 @@
 				</view>
 			</view>
 
-			<view v-else-if="classify === 'Typography'" class="control-content uni-scrollbar">
+			<view v-else-if="classify === 1" class="control-content uni-scrollbar">
 				<view class="category" v-for="(value, key) in typographies" :key="key">
 					<text class="category-name">{{key}}</text>
 					<view class="category-config" v-for="(v,k) in value">
 						<text class="category-config__label">{{k}} ({{v.description}})</text>
-						<v587-combox bordered :candidates="key|filterCandidates" v-model="v.value"
-							@input="typographyChanged = true"></v587-combox>
+						<v587-select border :options="key|filterCandidates" v-model="v.value"
+							@change="typographyChanged = true"></v587-select>
 					</view>
 				</view>
 			</view>
@@ -193,7 +193,7 @@
 			return {
 				name: 'V587-Theme1',
 				themeConfig: JSON.parse(JSON.stringify(config)),
-				classify: 'Color',
+				classify: 0,
 				themeList: [],
 				colorChanged: false, // 记录颜色Color是否发生更改
 				typographyChanged: false // 记录Typography是否发生更改
@@ -201,7 +201,12 @@
 		},
 		computed: {
 			classifies() {
-				return Object.keys(this.themeConfig)
+				return Object.keys(this.themeConfig).map((item, index) => {
+					return {
+						label: item,
+						value: index
+					}
+				})
 			},
 			colors() {
 				return this.themeConfig.Color
@@ -250,7 +255,7 @@
 
 			selectClassify(c) {
 				if (this.classifies.includes(c)) {
-					this.toAnchor(`#${c}`)
+					this.toAnchor(`#${c.label}`)
 				}
 			},
 			reset() {
@@ -323,8 +328,8 @@
 				for (let key in theme.theme) {
 					for (let k in theme.theme[key]) {
 						for (let j in theme.theme[key][k]) {
-							d.push(`--${j}: ${theme.theme[key][k][j].value};  //${theme.theme[key][k][j].description}`)
-							mp.push(`_${j}: ${theme.theme[key][k][j].value},  //${theme.theme[key][k][j].description}`)
+							d.push(`--${j}: ${theme.theme[key][k][j].value};  /*${theme.theme[key][k][j].description}*/`)
+							mp.push(`'--${j}': '${theme.theme[key][k][j].value}',  /*${theme.theme[key][k][j].description}*/`)
 						}
 					}
 				}

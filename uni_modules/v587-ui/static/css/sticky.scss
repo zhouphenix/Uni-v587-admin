@@ -1,0 +1,11 @@
+.v587-sticky {
+	/* #ifndef APP-PLUS-NVUE */
+	position: -webkit-sticky;
+	/* #endif */
+	position: sticky;
+
+	&.is-flex {
+		display: flex;
+		align-items: center;
+	}
+}

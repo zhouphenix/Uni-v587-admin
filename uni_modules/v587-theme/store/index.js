@@ -1,4 +1,3 @@
-import store from '@/store';
 import {
 	KEY_THEME,
 	KEY_LOCALE
@@ -46,12 +45,7 @@ export default {
 		themeMap: state => {
 			let rs = []
 			for(const [k,v] of Object.entries(state.themeMap)) {
-				if(k.startsWith('_')) {
-					rs.push(`${k.replace(/_/, '--')}: ${v}`)
-				} else {
-					rs.push(`${k}: ${v}`)
-				}
-				
+				rs.push(`${k}: ${v}`)
 			}
 			return rs.join(';')
 		}

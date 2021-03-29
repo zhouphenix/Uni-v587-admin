@@ -46,7 +46,12 @@
 	}
 </script>
 
-<style>
+<style lang="scss">
 	@import '@/common/uni.css';
 	@import '@/common/uni-icons.css';
+	@import '@/uni_modules/v587-ui/index.scss';
+	
+	:root {
+		--sidebarBg: url(/static/my_theme/bg_sidebar.jpg);
+	}
 </style>

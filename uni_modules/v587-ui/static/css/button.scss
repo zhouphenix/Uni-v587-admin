@@ -1,4 +1,4 @@
-.cl-button {
+.v587-button {
 	display: inline-flex !important;
 	align-items: center;
 	justify-content: center;
@@ -27,7 +27,7 @@
 		background-color: #f7f7f7;
 	}
 
-	[class^="cl-icon-"]:last-child {
+	[class^="v587-icon-"]:last-child {
 		margin-left: 10rpx;
 	}
 
@@ -55,8 +55,8 @@
 	&--text {
 		background-color: transparent;
 
-		.cl-button__text {
-			color: $cl-color-primary;
+		.v587-button__text {
+			color: var(--color-primary);
 		}
 
 		&::after {
@@ -67,12 +67,12 @@
 	&.is-loading {
 		opacity: 0.7;
 
-		.cl-button__loading {
+		.v587-button__loading {
 			position: relative;
 			top: 2rpx;
 		}
 
-		.cl-button__text {
+		.v587-button__text {
 			margin-left: 15rpx;
 		}
 	}
@@ -107,7 +107,7 @@
 			/* #endif */
 		}
 
-		.cl-button__loading {
+		.v587-button__loading {
 			position: absolute;
 			left: auto;
 			top: auto;
@@ -122,11 +122,11 @@
 	}
 
 	@mixin color($type, $color) {
-		&.cl-button--#{$type} {
+		&.v587-button--#{$type} {
 			background-color: $color;
 			border-color: $color;
 
-			.cl-button__text {
+			.v587-button__text {
 				color: #fff;
 			}
 
@@ -137,13 +137,13 @@
 			&.is-plain {
 				background-color: #fff;
 
-				.cl-button__text {
-					color: rgba($color, 0.8);
+				.v587-button__text {
+					color: $color;
 				}
 
 				&::after {
 					border-width: 1px;
-					border-color: rgba($color, 0.8);
+					border-color: $color;
 				}
 			}
 
@@ -152,10 +152,10 @@
 			}
 
 			&.button-hover {
-				background-color: rgba($color, 0.8);
+				background-color: $color;
 
 				&.is-plain {
-					.cl-button__text {
+					.v587-button__text {
 						color: #fff;
 					}
 				}
@@ -167,14 +167,14 @@
 		}
 	}
 
-	@include color(primary, $cl-color-primary);
-	@include color(success, $cl-color-success);
-	@include color(error, $cl-color-error);
-	@include color(warning, $cl-color-warning);
-	@include color(info, $cl-color-info);
+	@include color(primary, var(--color-primary));
+	@include color(success, var(--color-success));
+	@include color(error, var(--color-danger));
+	@include color(warning, var(--color-warning));
+	@include color(info, var(--color-info));
 }
 
-.cl-button + .cl-button,
-cl-button + cl-button {
+.v587-button + .v587-button,
+v587-button + v587-button {
 	margin-left: 20rpx;
 }

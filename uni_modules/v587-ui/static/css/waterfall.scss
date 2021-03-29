@@ -1,0 +1,9 @@
+.v587-waterfall {
+	width: 100%;
+	box-sizing: border-box;
+
+	&-column {
+		float: left;
+		break-inside: avoid;
+	}
+}

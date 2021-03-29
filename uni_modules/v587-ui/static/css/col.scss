@@ -1,0 +1,44 @@
+.v587-col {
+	width: 100%;
+	box-sizing: border-box;
+
+	&::before {
+		content: '';
+		display: block;
+	}
+}
+
+[class*='v587-col-'] {
+	float: left;
+	box-sizing: border-box;
+}
+
+.v587-col-0 {
+	display: none;
+	width: 0%;
+}
+
+@for $i from 1 through 24 {
+	.v587-col-push-#{$i},
+	.v587-col-pull-#{$i} {
+		position: relative;
+	}
+}
+
+@for $i from 1 through 24 {
+	.v587-col-#{$i} {
+		width: 100% / 24 * $i;
+	}
+
+	.v587-col-offset-#{$i} {
+		margin-left: 100% / 24 * $i;
+	}
+
+	.v587-col-pull-#{$i} {
+		right: 100% / 24 * $i;
+	}
+
+	.v587-col-push-#{$i} {
+		left: 100% / 24 * $i;
+	}
+}

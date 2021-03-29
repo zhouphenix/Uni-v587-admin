@@ -53,7 +53,7 @@ export default {
 					// 提取主题名称
 					const THEMES = themeFiles.keys().map(item => item.match(/theme_(.*)\.css$/)[1])
 					store.commit('theme/SET_THEME_LIST', THEMES)
-					store.commit('theme/SET_THEME', lastTheme || theme || THEMES[0])
+					store.commit('theme/SET_THEME', lastTheme || theme)
 					console.log('V587-theme主题插件加载成功')
 				} else {
 					console.warn('未检测到主题文件，请确认主题文件是否放置在/static/theme 目录下');

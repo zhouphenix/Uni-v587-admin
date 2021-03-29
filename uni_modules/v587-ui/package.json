@@ -1,8 +1,8 @@
 {
   "id": "v587-ui",
   "displayName": "v587-ui 组件库",
-  "version": "1.0.0",
-  "description": "打造一套自己的ui组件库（计划中）",
+  "version": "1.0.2",
+  "description": "基于COOL-UNI 开发，可切换主题的ui组件库",
   "keywords": [
     "v587-ui",
     "组件库"

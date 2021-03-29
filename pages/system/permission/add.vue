@@ -1,6 +1,5 @@
 <template>
 	<view class="uni-container">
-		<uni-notice-bar showClose single text="新建权限必须分配至少一个菜单权限, 否则绑定角色无登录权限"></uni-notice-bar>
 		<uni-forms ref="form" validateTrigger="bind" :rules="rules" @submit="submit">
 			<uni-forms-item name="permission_id" label="权限标识" required>
 				<uni-easyinput v-model="formData.permission_id" :clearable="false" placeholder="请输入权限标识" />

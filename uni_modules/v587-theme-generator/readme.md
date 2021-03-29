@@ -33,6 +33,8 @@ pages.json中subPackages节点中添加
 
 ![主题生成器展示图](https://vkceyugu.cdn.bspapp.com/VKCEYUGU-78a67da8-ae76-4f35-8fee-dac7cb24bcd4/ac4337a3-66ac-41e3-8753-6ff52f0675c1.gif)
 
+![主题生成器结合组件库展示图](https://vkceyugu.cdn.bspapp.com/VKCEYUGU-78a67da8-ae76-4f35-8fee-dac7cb24bcd4/2940eb41-b2bf-489a-acd7-096eebd1b5d3.gif)
+
 ## 功能在完善中，体验功能可关注订阅号
 
 ## 关注订阅号

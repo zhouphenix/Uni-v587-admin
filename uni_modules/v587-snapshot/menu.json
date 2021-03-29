@@ -1,0 +1,8 @@
+[{
+	"menu_id": "v587-snapshot",
+	"name": "V587 Snapshot",
+	"icon": "",
+	"url": "/uni_modules/v587-snapshot/pages/index/index",
+	"sort": 800,
+	"permission": []
+}]
