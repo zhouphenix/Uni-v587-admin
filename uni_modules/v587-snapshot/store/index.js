@@ -10,7 +10,8 @@ export default {
 		timeline: [], // 存储数据快照
 		current: -1, // 当前数据快照的指针, 为 timeline 建立的索引
 		limit: 100, // 规定了 timeline 的最大长度，防止存储的数据量过大
-
+		enableSnap: true, // 启用快照
+		composeSnapshot: null // 组合快照存储
 	},
 
 	mutations: {
@@ -24,6 +25,14 @@ export default {
 				state.timeline.shift()
 			}
 			state.current = state.timeline.length - 1
+		},
+		
+		SET_ENABLE_SNAP(state, enable) {
+			state.enableSnap = enable
+		},
+		
+		SET_COMPOSE_SNAPSHOT(state, composeSnapshot) {
+			state.composeSnapshot = composeSnapshot
 		}
 	},
 

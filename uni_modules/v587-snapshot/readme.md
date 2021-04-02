@@ -137,6 +137,33 @@ this._endTransaction()
 **【注意】** 排序等复杂操作属于聚合操作类型， 需要包裹聚合操作或事务中
 
 
+### 单独使用， 不创建监听对象
+
+如交换位置操作（组合操作）
+
+```
+// 交换位置， 两步操作
+const composeSnapshot = this._createSnapshot(this.R, [])
+const {
+	newIndex,
+	oldIndex
+} = e
+const newVal = this._clone(this.children[newIndex])
+const oldVal = this._clone(this.children[oldIndex])
+let oldSnap = this._createSnapshot(this.U, this.children, {
+	oldVal,
+	newVal
+}, newIndex)
+
+const newSnap = this._createSnapshot(this.U, this.children, {
+	oldVal: newVal,
+	newVal: oldVal
+}, oldIndex)
+composeSnapshot.target.push(oldSnap, newSnap)
+this._snapshot(composeSnapshot)
+```
+
+
 
 
 ### 撤销 （actions 返回一个Promise， 携带快照数据）
@@ -415,6 +442,8 @@ this._endTransaction()
 ## 成品展示
 
 ![快照撤销/重做、回档功能展示](https://vkceyugu.cdn.bspapp.com/VKCEYUGU-78a67da8-ae76-4f35-8fee-dac7cb24bcd4/07e60660-ccbc-4f09-a7f9-93cf5e5d8758.gif)
+
+![快照撤销/重做、回档功能展示-- 实战项目](https://vkceyugu.cdn.bspapp.com/VKCEYUGU-78a67da8-ae76-4f35-8fee-dac7cb24bcd4/d961cc1f-321a-4a90-aaf2-dca7895895f7.gif)
 
 ## 功能在完善中，体验功能可关注订阅号
 

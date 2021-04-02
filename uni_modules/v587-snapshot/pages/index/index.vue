@@ -101,6 +101,9 @@
 
 	import SNAPSHOT from 'uni_modules/v587-snapshot/mixins'
 	import CRUD from 'uni_modules/v587-snapshot/js_sdk/v587-toolbox/crud.js'
+	import {
+		merge
+	} from 'uni_modules/v587-snapshot/js_sdk/v587-toolbox/object.js'
 
 	export default {
 		mixins: [SNAPSHOT],
@@ -215,6 +218,34 @@
 			testObserveObj() {
 				this.observeObj.a = 2
 				this.observeObj.b = '新增属性b'
+				
+			
+				
+				const mer = {}
+				
+				
+				const mt = {
+					a: 1,
+					b: [{
+						aa: 1,
+						bb: "字符串"
+					}, {
+						aa: 2,
+						bb: "字符串2"
+					}],
+					c: '字符串',
+					d: a => console.log("a: ",a),
+					e(a) {
+						console.log("a: ",a)
+					}
+					
+				}
+				
+				console.log("mer mt: ",mer, mt);
+				
+				merge(mer, mt)
+				
+				console.log("mer: ",mer);
 			},
 			// 获取数据
 			getData(pageCurrent, value = "") {

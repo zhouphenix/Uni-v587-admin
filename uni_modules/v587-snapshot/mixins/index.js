@@ -8,20 +8,23 @@ import CRUD from '../js_sdk/v587-toolbox/crud.js'
 
 import {clone} from '../js_sdk/v587-toolbox/object.js'
 
+import { mapState} from 'vuex'
 
 export default {
 	data() {
 		return {
-			...CRUD,
-			enableSnap: true,
-			composeSnapshot: null
+			...CRUD
 		}
+	},
+	
+	computed:{
+		...mapState('snapshot', ['enableSnap', 'composeSnapshot'])
 	},
 
 	methods: {
 		// 使能开关
 		enabledSnap(canSnap) {
-			this.enableSnap = canSnap
+			this.$store.commit('snapshot/SET_ENABLE_SNAP', canSnap)
 		},
 		// 创建快照
 		_createSnapshot(action = CRUD.C, target, diff, key) {
@@ -57,12 +60,12 @@ export default {
 			if (this.composeSnapshot) {
 				throw '请结束当前事务，再尝试...'
 			}
-			this.composeSnapshot = this._createSnapshot(CRUD.R, [])
+			this.$store.commit('snapshot/SET_COMPOSE_SNAPSHOT', this._createSnapshot(CRUD.R, []) )
 		},
 		// 事务操作end
 		_endTransaction() {
 			this.composeSnapshot && this._snapshot(this.composeSnapshot)
-			this.composeSnapshot = null
+			this.$store.commit('snapshot/SET_COMPOSE_SNAPSHOT', null )
 		},
 
 		_snapshot(snapshot) {

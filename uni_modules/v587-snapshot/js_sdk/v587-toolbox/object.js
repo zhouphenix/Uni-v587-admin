@@ -1,54 +1,67 @@
-/**对象克隆
- * @param {Object} myObj 克隆对象
- */
-function clone(myObj) {
-	if (typeof(myObj) != 'object') return myObj;
-	if (myObj == null) return myObj;
-
-	var myNewObj;
-	if (myObj.constructor) {
-		myNewObj = new myObj.constructor();
-	} else
-		myNewObj = {}
-	for (var i in myObj)
-		myNewObj[i] = clone(myObj[i]);
-	return myNewObj;
+// 检验是否是数组
+function isArray(obj) {
+	return Object.prototype.toString.call(obj) === '[object Array]';
 }
 
+//判断是否是对象
 function isObject(obj) {
-	return typeof obj === 'object'
+	return Object.prototype.toString.call(obj) == '[object Object]';
 }
+
+/**对象克隆
+ * @param {Object} obj 克隆对象
+ */
+function clone(obj) {
+	if (typeof(obj) != 'object') return obj;
+	if (obj == null) return obj;
+
+	let newObj = {}
+	if (obj.constructor) {
+		newObj = new obj.constructor();
+	}
+
+	for (let i in obj)
+		newObj[i] = clone(obj[i]);
+	return newObj;
+}
+
 
 /**
- * Deep merge two objects.
- * @param target
- * @param ...sources
+ * 深度合并对象
+ * @param target 目标对象
+ * @param ...sources  合并对象集
  */
 function merge(target, ...sources) {
-	if (!sources.length) return target;
-
-	const source = sources.shift();
-
-	if (!source) {
-		return merge(target, ...sources);
-	}
-
-	if (isObject(target) && isObject(source)) {
-		for (const key in source) {
-			if (isObject(source[key])) {
-				if (!target[key]) Object.assign(target, {
-					[key]: {}
-				});
-				merge(target[key], source[key]);
-			} else {
-				Object.assign(target, {
-					[key]: source[key]
-				});
+	// 不是对象，则返回
+	if (!isObject(target)) return
+	// 参数长度大于0，开始合并操作
+	if (sources.length > 0) {
+		// 该层级合并操作
+		(function fn(t, ...s) {
+			// 开始递归遍历
+			let source = s.shift();
+			// 如果存在，则执行合并操作
+			if (source && isObject(source)) {
+				if (isArray(source)) {
+					fn(t, ...source)
+				} else {
+					for (const k in source) {
+						if (isObject(source[k])) {
+							if (!t[k]) continue
+							fn(t[k], source[k])
+						} else {
+							t[k] = source[k]
+						}
+					}
+				}
+			} else { // 不存在， 递归下一层
+				fn(t, s)
 			}
-		}
+
+		})(target, ...sources)
+
 	}
 
-	return merge(target, ...sources);
 }
 
 export {
