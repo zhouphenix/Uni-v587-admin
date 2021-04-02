@@ -50,6 +50,16 @@ Vue.use(V587Snapshot, {store, limit: 100})
 		//...
 	}
 ```
+
++ 全局引入
+
+`main.js` 文件中插入
+
+```
+import SNAPSHOT from 'uni_modules/v587-snapshot/mixins'
+Vue.mixin(SNAPSHOT)
+```
+
 其中 `CRUD` 为定义的操作类型
 
 ```
@@ -142,25 +152,25 @@ this._endTransaction()
 如交换位置操作（组合操作）
 
 ```
-// 交换位置， 两步操作
-const composeSnapshot = this._createSnapshot(this.R, [])
-const {
-	newIndex,
-	oldIndex
-} = e
-const newVal = this._clone(this.children[newIndex])
-const oldVal = this._clone(this.children[oldIndex])
-let oldSnap = this._createSnapshot(this.U, this.children, {
-	oldVal,
-	newVal
-}, newIndex)
-
-const newSnap = this._createSnapshot(this.U, this.children, {
-	oldVal: newVal,
-	newVal: oldVal
-}, oldIndex)
-composeSnapshot.target.push(oldSnap, newSnap)
-this._snapshot(composeSnapshot)
+	// 交换位置， 两步操作
+	this._beginTransaction()
+	const {
+		newIndex,
+		oldIndex
+	} = e
+	const newVal = this._clone(this.children[newIndex])
+	const oldVal = this._clone(this.children[oldIndex])
+	let oldSnap = this._createSnapshot(this.U, this.children, {
+		oldVal,
+		newVal
+	}, newIndex)
+	
+	const newSnap = this._createSnapshot(this.U, this.children, {
+		oldVal: newVal,
+		newVal: oldVal
+	}, oldIndex)
+	this.composeSnapshot.target.push(oldSnap, newSnap)
+	this._endTransaction()
 ```
 
 
@@ -389,7 +399,7 @@ this._snapshot(composeSnapshot)
 
 
 
-本插件采用的是快照式方式， 使用vuex管理数据快照， 为了通用性， 只管理数据， 快照的数据结构需要自行定
+本插件采用的是**命令式**方式， 使用vuex管理数据快照， 为了通用性， 只管理数据， 快照的数据结构需要自行定
 
 义， 为没类操作定义个类型， 然后通过类型去做数据回档（比如 diff操作）
 
