@@ -96,3 +96,6 @@ query.select('#id').boundingClientRect(data => {
 关注订阅号，回复“v587体验账号” 获取体验账号
 
 ![关注订阅号](https://vkceyugu.cdn.bspapp.com/VKCEYUGU-aeeaeb50-6081-4de4-b6ab-d4b54fca38bf/00aa4a73-04b4-4b1a-b6d1-161a2781ec88.jpg)
+
+## 附
+### 一、循环中v-bind 更新问题， 需要调用`$forceUpdate()` 方法强制更新

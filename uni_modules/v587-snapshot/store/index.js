@@ -66,7 +66,7 @@ export default {
 			getters,
 			dispatch,
 			commit
-		}, params) => {
+		}) => {
 			if (!getters.hasPre) {
 				return Promise.reject('已经回到【1st】步， 无法撤销')
 			}

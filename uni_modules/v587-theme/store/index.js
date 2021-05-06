@@ -17,7 +17,9 @@ export default {
 		// 支持语言列表， 读取/static/i18n/*.js 
 		localeList: [],
 		// 语言字典
-		localesMap: {}
+		localesMap: {},
+		// 是否H5模式， 默认false， 即采用适配所有通用模式
+		isH5Mode: false
 	},
 	mutations: {
 		SET_THEME: (state, theme) => {
@@ -39,12 +41,15 @@ export default {
 		},
 		SET_LOCALES_MAP: (state, localesMap) => {
 			state.localesMap = localesMap
+		},
+		SET_H5_MODE: (state, isH5) => {
+			state.isH5Mode = isH5
 		}
 	},
 	getters: {
 		themeMap: state => {
 			let rs = []
-			for(const [k,v] of Object.entries(state.themeMap)) {
+			for (const [k, v] of Object.entries(state.themeMap)) {
 				rs.push(`${k}: ${v}`)
 			}
 			return rs.join(';')

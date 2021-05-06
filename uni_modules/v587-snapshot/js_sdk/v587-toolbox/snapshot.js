@@ -42,7 +42,9 @@ function undo({
 			break
 		case CRUD.U:
 			if (_type.isArray(target)) {
+				// console.log("merge: ", JSON.stringify(target[key]), key, diff.oldVal);
 				merge(target[key], diff.oldVal)
+				// console.log("merge#2: ", JSON.stringify(target[key]));
 			} else {
 				target[key] = diff.oldVal
 			}
@@ -57,9 +59,10 @@ function undo({
 			// 组合操作
 		case CRUD.R:
 		default:
-			target.forEach(item => {
-				undo(item)
-			})
+			let i = target.length - 1
+			while(i >= 0){
+				undo(target[i--])
+			}
 			break
 	}
 
@@ -96,9 +99,7 @@ function redo({
 			// 组合操作
 		case CRUD.R:
 		default:
-			target.forEach(item => {
-				redo(item)
-			})
+			target.forEach(item => redo(item))
 			break
 	}
 }

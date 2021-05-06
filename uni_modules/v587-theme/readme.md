@@ -23,10 +23,10 @@
 ### 1. 首先定义一个目录存储主题（固定如此）： `/static/theme/`
 
 	/static/theme/目录结构
-	│  theme_dark.css
-	│  theme_light.css
-	│  theme_dark.js  // 小程序使用
-	│  theme_light.js // 小程序使用
+	│  theme_dark.css  // 只用于H5
+	│  theme_light.css // 只用于H5
+	│  theme_dark.js  // 通用（包括小程序，H5等）
+	│  theme_light.js // 通用（包括小程序，H5等）
 	│
 	├─dark
 	│      bg_sidebar.jpg
@@ -84,34 +84,48 @@ export default {
 		themeList: [], // 方便管理， 动态读取主题目录的下的主题文件， 方便后续扩展
 		// 主题字典
 		themeMap: {},
+		// 是否H5模式， 默认false， 即采用适配所有通用模式
+		isH5Mode: false
 	}
 }
 ```
 
-### 3. 监听主题变化，加载对应主题
+### 3. 监听主题变化，加载对应主题【变更】
 
 ```
-// #ifdef MP
-onThemeChange(newVal, oldVal) {
-	if (this.themeList.includes(newVal)) {
-		this.$store.commit('theme/SET_THEME_MAP', require(`@/static/theme/theme_${newVal}.js`).default)
-	}
-},
-// #endif
 
-// #ifndef MP
-onThemeChange(newVal, oldVal) {
-	// 修改顺序， 防止切换过程中 当前主题 -> 默认主题（异常过程） -> 目标主题
-	if (this.themeList.includes(newVal)) {
-		loadCss(`/static/theme/theme_${newVal}.css`)
-	}
-	if (this.themeList.includes(oldVal)) {
-		removeCss(`/static/theme/theme_${oldVal}.css`)
-	}
-},
-// #endif
-		
+computed: {
+		...mapState('theme', ['theme', 'themeList', 'locale', 'localeList', 'isH5Mode'])
+	},
+	
+methods: {
+    onThemeChange(newVal, oldVal) {
+            if (this.isH5Mode) {
+                // 修改顺序， 防止切换过程中 当前主题 -> 默认主题（异常过程） -> 目标主题 （貌似第一次加载仍然存在）
+                if (this.themeList.includes(newVal)) {
+                    loadCss(`/static/theme/theme_${newVal}.css`)
+                }
+                if (oldVal && this.themeList.includes(oldVal)) {
+                    removeCss(`/static/theme/theme_${oldVal}.css`)
+                }
+            } else {
+                if (this.themeList.includes(newVal)) {
+                    this.$store.commit('theme/SET_THEME_MAP', require(`@/static/theme/theme_${newVal}.js`).default)
+                }
+            }
+
+        }
+}
+	
 ```
+
+【变更】此处新增 `isH5Mode` ,主动设置采用 '仅限H5' 和 ‘ 通用’  两种模式， 此处保留只为兼容， 调用
+
+```
+store.commit('theme/SET_H5_MODE', !!isH5Mode)
+```
+
+
 
 ### 4.使用
 
@@ -120,7 +134,7 @@ onThemeChange(newVal, oldVal) {
 ```
 import V587Theme from '@/uni_modules/v587-theme/plugin.js'
 // 传入store 实例， 指定默认主题：theme: 'light'
-Vue.use(V587Theme, {store, theme: 'light'})
+Vue.use(V587Theme, {store, theme: 'light', isH5Mode: false })
 ```
 
 + 步骤二、App.vue 或任意使用的地方引入
@@ -132,7 +146,7 @@ export default {
 }
 ```
 
-+ 步骤三（小程序）引入样式
++ 步骤三  引入样式（可通用）
 
 ```
 computed: {
@@ -167,17 +181,21 @@ computed: {
 scss 函数上（如rgba）无法识别var(--arg)传参  ：SassError: argument `$color` of `rgba($color, $alpha)` must be a color
 
 
-## I18N国际化开发
+## I18N国际化开发【变更】
 
 ### 1. 首先定义一个目录存储语言资源（固定如此）： `/static/i18n/`
 
 	│
 	├─i18n
-	│      en_US.js
+	│      en-US.js //en_US.js '_'改为 ‘-’， 符合js命名规范即可
 	│      ja.js
-	│      zh_CN.js
-	
-**【注意】** 语言文件命名需要符合js命名规则，代码中会当做变量名使用
+	│      zh-CN.js //zh_CN.js '_'改为 ‘-’， 符合js命名规范即可
+
+
+
+
+
+【注意】** 语言文件命名需要符合js命名规范，代码中会当做变量名使用（不限制‘ - ’）
 
 文件格式如下：
 
@@ -229,7 +247,7 @@ onLocaleChange(newVal) {
 ```
 import V587Theme from '@/uni_modules/v587-theme/plugin.js'
 // 传入store 实例， 指定默认主题：theme: 'light'
-Vue.use(V587Theme, {store, theme: 'light', locale: 'zh_CN'})
+Vue.use(V587Theme, {store, theme: 'light', locale: 'zh-CN'})
 ```
 
 + 步骤二、App.vue 或任意使用的地方引入

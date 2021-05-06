@@ -346,7 +346,7 @@
 				} = (e.touches && e.touches[0]) || e
 				if (component === 'sv') {
 					this.getComponentInfo('slider', data => {
-						console.log("data: ", data);
+						// console.log("data: ", data);
 						this.setSliderValue('saturation', pageX - data.left)
 						this.setSliderValue('value', pageY - data.top + this.windowTop)
 						this.touchSlider(e, component)
@@ -540,11 +540,12 @@
 	$sliderBarWidth: 80%;
 	$sliderHeight: 30px;
 	$verticalSpace: 6px;
+	$width: 220px;
 
 	.v587-color-picker {
 		position: relative;
 		background-color: white;
-		width: 220px;
+		width: $width;
 		box-sizing: border-box;
 		padding: 10px;
 		border-radius: 2px;
@@ -600,6 +601,10 @@
 			border: 1px solid #FFF;
 			box-sizing: border-box;
 			background-color: rgba(199, 199, 199, .7);
+			&:hover {
+				z-index: 9;
+				box-shadow: 0 0 8px 1px rgba($color: #000000, $alpha: 0.15) inset;
+			}
 		}
 
 		.palette {
@@ -748,11 +753,12 @@
 			margin-top: $verticalSpace;
 
 			&>.fav-colors__item:nth-child(n) {
-				width: 24px;
-				height: 24px;
+				width: $width / 8;
+				height: $width / 8;
 				border: 1px solid rgba($color: #000000, $alpha: 0.1);
 				margin-top: 2px;
 				cursor: pointer;
+				box-sizing: border-box;
 
 				&:hover {
 					border-color: rgba($color: #000000, $alpha: 0.5);

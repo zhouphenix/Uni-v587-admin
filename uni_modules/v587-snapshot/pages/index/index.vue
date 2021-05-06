@@ -8,7 +8,10 @@
 				<input class="uni-search" type="text" v-model="searchVal" placeholder="请输入搜索内容" />
 				<button class="uni-button" type="default" size="mini" @click="search">搜索</button>
 				<button class="uni-button" type="primary" size="mini" @click="add(true)">新增(首行)</button>
+				<button class="uni-button" type="primary" size="mini" @click="insert1()">插入一条（1）</button>
 				<button class="uni-button" type="primary" size="mini" @click="add()">新增(末尾)</button>
+				<button class="uni-button" type="primary" size="mini" @click="reverse()">逆序</button>
+				<button class="uni-button" type="primary" size="mini" @click="moveDown2()">下移两位(第一条)</button>
 				<button class="uni-button" type="warn" size="mini" @click="delTable"
 					:disabled="selectedIndexs.length === 0">删除</button>
 			</view>
@@ -58,6 +61,8 @@
 							:disabled="!hasPre">撤销</button>
 						<button class="uni-button" type="default" size="mini" @click="redo"
 							:disabled="!hasNext">重做</button>
+						<view class="uni-group" style="float: right;">Limit: <input type="number" v-model="limit" />
+						</view>
 					</view>
 				</view>
 				<uni-table border stripe emptyText="暂无更多数据">
@@ -94,6 +99,7 @@
 
 <script>
 	import {
+		mapState,
 		mapGetters
 	} from 'vuex'
 
@@ -104,6 +110,11 @@
 	import {
 		merge
 	} from 'uni_modules/v587-snapshot/js_sdk/v587-toolbox/object.js'
+	import {
+		move
+	} from 'uni_modules/v587-snapshot/js_sdk/v587-toolbox/array.js'
+	
+	
 
 	export default {
 		mixins: [SNAPSHOT],
@@ -130,7 +141,15 @@
 			}
 		},
 		computed: {
-			...mapGetters('snapshot', ['snapshots', 'currentSnapshotIndex', 'hasPre', 'hasNext'])
+			...mapGetters('snapshot', ['snapshots', 'currentSnapshotIndex', 'hasPre', 'hasNext']),
+			limit: {
+				get() {
+					return this.$store.state.snapshot.limit
+				},
+				set(val) {
+					this.$store.commit('snapshot/SET_LIMIT', val)
+				}
+			}
 		},
 		onLoad() {
 			this.getData(1)
@@ -172,6 +191,29 @@
 
 
 
+			},
+
+			reverse() {
+				this._beginTransaction()
+				this.tableData.reverse()
+				this._endTransaction()
+			},
+			
+			insert1() {
+				this._beginTransaction()
+				this.tableData.splice(1, 1)
+				this.tableData.splice(2, 0, {
+					"date": Date.now(),
+					"name": "Dcloud-insert",
+					"address": "上海市普陀区金沙江路 1516 弄"
+				})
+				this._endTransaction()
+			},
+
+			moveDown2() {
+				this._beginTransaction()
+				move(this.tableData, 0, 2)
+				this._endTransaction()
 			},
 
 			del(index) {
@@ -218,12 +260,12 @@
 			testObserveObj() {
 				this.observeObj.a = 2
 				this.observeObj.b = '新增属性b'
-				
-			
-				
+
+
+
 				const mer = {}
-				
-				
+
+
 				const mt = {
 					a: 1,
 					b: [{
@@ -234,18 +276,19 @@
 						bb: "字符串2"
 					}],
 					c: '字符串',
-					d: a => console.log("a: ",a),
+					d: a => console.log("a: ", a),
 					e(a) {
-						console.log("a: ",a)
+						console.log("a: ", a)
 					}
-					
+
 				}
-				
-				console.log("mer mt: ",mer, mt);
-				
-				merge(mer, mt)
-				
-				console.log("mer: ",mer);
+
+				console.log("mer mt: ", mer, mt);
+				const mb = {mb: 'mb'}
+
+				merge(mer, mt, mb)
+
+				console.log("mer: ", mer);
 			},
 			// 获取数据
 			getData(pageCurrent, value = "") {
@@ -274,7 +317,7 @@
 					success,
 					value
 				} = options
-				let data = tableData.slice(0, 2).filter((item, index) => {
+				let data = tableData.slice(0, 4).filter((item, index) => {
 					const idx = index - (pageCurrent - 1) * pageSize
 					return idx < pageSize && idx >= 0
 				})

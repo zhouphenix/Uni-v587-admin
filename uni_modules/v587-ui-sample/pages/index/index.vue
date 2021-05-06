@@ -1,21 +1,23 @@
 <template>
 	<view class="v587-ui-sample">
 		<view class="ui-detail ">
-		</view>
-		<image class="phone-frame" src="/uni_modules/v587-ui-sample/static/iphone_x.png" mode="scaleToFill"></image>
-		<view class="phone-container">
 
+		</view>
+		<image v-if="platform === 'windows'" class="phone-frame" src="/uni_modules/v587-ui-sample/static/iphone_x.png"
+			mode="scaleToFill"></image>
+		<view class="phone-container" :class="{'is-phone-container': platform !== 'windows'}">
 			<view class="phone uni-scrollbar">
 				<view class="phone-content">
 					<view class="phone-header" v-show="!hideHeader">
-						<image src="/uni_modules/v587-ui-sample/static/logo.png" style="width: 100%;" mode="widthFix"></image>
+						<image src="/uni_modules/v587-ui-sample/static/logo.png" style="width: 100%;" mode="widthFix">
+						</image>
 					</view>
-					<v587-sticky top="30px">
-						<v587-topbar class="topbar" v-show="select.length > 0" :title="title" color="#fff" @back="_ =>{select = []}"
-							background-color="var(--color-primary)" :is-top="false"></v587-topbar>
-					</v587-sticky>
+					<v587-topbar class="topbar" v-show="select.length > 0" :title="title" color="#fff"
+						@back="_ =>{select = []}" background-color="var(--color-primary)" :is-top="false">
+					</v587-topbar>
 					<home v-if="!select.length" :list="list" v-model="select"></home>
-					<view v-else style="padding: 10px 6px;background-color: #f7f7f7; height: 100%; box-sizing: border-box;" >
+					<view v-else
+						style="padding: 10px 6px;background-color: #f7f7f7; height: 100%; box-sizing: border-box;">
 						<component :is="currentComponent"></component>
 					</view>
 
@@ -357,7 +359,13 @@
 			height: $phoneHeight + 46px;
 		}
 
-
+		.is-phone-container {
+			top: var(--window-top) !important;
+			right: 0 !important;
+			width: 100% !important;
+			height: calc(100% -  var(--window-top) ) !important;
+		}
+		
 		.phone-container {
 			position: fixed;
 			top: 112px;
@@ -371,8 +379,8 @@
 			.phone {
 				background-color: rgb(255, 255, 255);
 				position: relative;
-				width: $phoneWidth;
-				height: $phoneHeight;
+				width: 100%;
+				height: 100%;
 
 
 				.phone-header {
@@ -384,10 +392,12 @@
 					box-sizing: border-box;
 					height: 100%;
 				}
-				
+
 				.topbar {
 					opacity: 0.3;
-					
+					position: sticky;
+					top: 0;
+
 					&:hover {
 						opacity: 1;
 					}

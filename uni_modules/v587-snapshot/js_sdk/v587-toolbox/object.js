@@ -54,8 +54,10 @@ function merge(target, ...sources) {
 						}
 					}
 				}
-			} else { // 不存在， 递归下一层
-				fn(t, s)
+			} 
+			//  递归下一层
+			if(s.length > 0) {
+				fn(t, ...s)
 			}
 
 		})(target, ...sources)
